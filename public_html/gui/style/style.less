@@ -17,7 +17,8 @@
 	display: none !important;
 }
 
-.gt-profile-card () {
+[gt-profile-card] {
+	border-bottom: 5px solid @border-bottom;
 	background-color: white;
 
 	[gt-who] {
@@ -283,10 +284,6 @@ body > main {
 				padding: 11px 0 0 20px;
 			}
 
-			&[gt-profile-card] {
-				.gt-profile-card();
-			}
-
 			&[gt-how-to-start] {
 
 				ul {
@@ -350,7 +347,7 @@ body > main {
 		}
 	}
 
-	section[gt-posts], section[gt-follows], section[gt-followers] {
+	section[gt-posts], section[gt-invite], section[gt-follows], section[gt-followers] {
 		float: right;
 		width: 590px;
 
@@ -370,10 +367,10 @@ body > main {
 				display: inline-block;
 				font-size: 14px;
 				padding: 13px 15px 0 15px;
-				margin-right: -4px;
+				margin-right: -3.5px;
 			}
 
-			&:not(.static) li {
+			&:not(.static) li:not(.static) {
 				&.selected { border-bottom: 5px solid darken(@main-background, 5%) }
 				&:hover  { background-color: darken(@main-background, 10%) }
 				&:active { background-color: darken(@main-background, 15%) }
@@ -486,13 +483,52 @@ body > main {
 	}
 
 	[gt-follows] article, [gt-followers] article {
-		.gt-profile-card();
 		.box-sizing(border-box);
-		position: relative;
 		display: inline-block;
 		margin-right: 1.5px;
 		width: 300px;
-		border-bottom: 5px solid @border-bottom;
 		cursor: pointer;
+	}
+
+	[gt-invite] article {
+		.box-sizing(border-box);
+		position: relative;
+		width: 100%;
+		height: 70px;
+		background-color: white;
+		border-bottom: 1px solid @border-bottom;
+		padding: 22px 20px 0 84px;
+		cursor: pointer;
+
+		img {
+			height: 50px;
+			border-radius: 25px;
+			position: absolute;
+			top: 9px;
+			left: 16px;
+		}
+
+		a { 
+			font-size: 18px;
+			text-decoration: none;
+			cursor: pointer;
+			color: @main-aqua;
+		}
+
+		button {
+			position: absolute;
+			top: 23px;
+			right: 15px;
+		}
+
+		&:hover {
+			background-color: lighten(@main-background, 7%);
+			button { background-color: lighten(@dark-aqua, 10%) }			
+		}
+
+		&:active { 
+			background-color: lighten(@main-background, 5%);
+			button { background-color: darken(@dark-aqua, 10%) }
+		}
 	}
 }
