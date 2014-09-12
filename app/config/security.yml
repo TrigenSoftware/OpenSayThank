@@ -1,0 +1,32 @@
+security:
+    providers:
+        oauth_user_provider:
+            id: trigen.aouth_user_provider
+
+    encoders:
+        Trigen\Bundle\UserBundle\Entity\User: sha512
+
+    firewalls:
+        secured_area:
+            pattern:   ^/
+            anonymous: ~
+
+            logout:
+                path:   /logout
+                target: /
+
+            oauth:
+                resource_owners:
+                    twitter:   "/login/twitter"
+                    vkontakte: "/login/vkontakte"
+                    instagram: "/login/instagram"
+
+                login_path:   /login
+                failure_path: /login
+
+                oauth_user_provider:
+                    service: trigen.aouth_user_provider
+
+    access_control:
+        - { path: ^/login,   roles: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/connect, roles: IS_AUTHENTICATED_ANONYMOUSLY }
