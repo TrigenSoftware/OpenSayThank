@@ -1,3 +1,3 @@
 <?php
 
-require "app_dev.php";
+require "app.php";

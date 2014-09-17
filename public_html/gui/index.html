@@ -2,9 +2,11 @@
 <html>
 	<head>
 		<meta charset="utf-8">
+        <script async type="text/javascript" src="bower_components/jquery/dist/jquery.min.js"></script>
 		<script async type="text/javascript" src="bower_components/less.js/dist/less-1.7.5.js"></script>
 		<link rel="stylesheet" type="text/css" href="bower_components/normalize.css/normalize.css">
 		<link rel="stylesheet" type="text/less" href="style/style.less">
+        <script async type="text/javascript" src="app/ib-fix.dev.js"></script>
 	</head>
 	<body>
 		<nav gt-fixed-nav class="full">
@@ -13,14 +15,11 @@
 		        	<li gt-index>
 						<a class="selected">Главная</a>
 						<sup>5</sup>
-					</li>
-		            <li gt-follows>
+					</li><li gt-follows>
 		            	<a>Подписки</a>
-		            </li>
-		            <li gt-followers>
+		            </li><li gt-followers>
 		            	<a>Подписчики</a>
-		            </li>
-		            <li gt-say>
+		            </li><li gt-say>
 		            	<a>Сказать Спасибо</a>
 		            </li>
 		        </ul>
@@ -104,9 +103,7 @@
 	    	</section>
 	    	<section gt-posts>
     			<ul gt-nav>
-    				<li>Новости</li>
-    				<li>Сказал</li>
-    				<li class="selected">Получил</li>
+    				<li>Новости</li><li>Сказал</li><li class="selected">Получил</li>
     			</ul>
     			<article>
     				<img src="img/photo.jpg">

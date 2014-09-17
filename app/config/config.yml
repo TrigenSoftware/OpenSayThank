@@ -1,5 +1,4 @@
 imports:
-    - { resource: parameters.yml }
     - { resource: security.yml }
 
 framework:
@@ -67,23 +66,3 @@ swiftmailer:
     username:  "%mailer_user%"
     password:  "%mailer_password%"
     spool:     { type: memory }
-
-hwi_oauth:
-    firewall_name: secured_area
-    resource_owners:
-        twitter:
-            type:                twitter
-            client_id:           CjoM2NLV6K67DntR9O7GebHO1
-            client_secret:       Yb8gjU7t813zfriQ0Ci8KiojYhimWEjRrCUlhQCYNcIRq15OKH
-            paths:
-                profilepicture:  profile_image_url
-
-        vkontakte:
-            type:                vkontakte
-            client_id:           4545689
-            client_secret:       QOJOuyVbIIgqhZ25Hq3F
-
-        instagram:
-            type:                instagram
-            client_id:           167e73e8ff5c43d38e3a267aa5f5b3cb
-            client_secret:       8a5fa28eba55429f9923fc74722337b1

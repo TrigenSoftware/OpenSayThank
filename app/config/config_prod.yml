@@ -1,4 +1,5 @@
 imports:
+    - { resource: parameters_prod.yml }
     - { resource: config.yml }
 
 #framework:
@@ -23,3 +24,23 @@ monolog:
             level: debug
         console:
             type:  console
+
+hwi_oauth:
+    firewall_name: secured_area
+    resource_owners:
+        twitter:
+            type:                twitter
+            client_id:           MYqVo09xNd4JQLqK2UwvdR1q7
+            client_secret:       4PTxIhh8f72ZwzJQFyPehitQyuMeavkYW6aZ3PpLzqgIv7vczJ
+            paths:
+                profilepicture:  profile_image_url
+
+        vkontakte:
+            type:                vkontakte
+            client_id:           4541892
+            client_secret:       kuuN91Qw618U0hrg0Rew
+
+        instagram:
+            type:                instagram
+            client_id:           cf8949e2ec854f18841621ae8fc5d43a
+            client_secret:       5fe40d4324874b5b9e24e91d40c0f3e6
