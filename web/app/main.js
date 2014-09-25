@@ -27,10 +27,6 @@ ThankApp.config(function($routeProvider) {
 	    	templateUrl : "/templates/followers.html",
 	    	controller  : "FollowersViewController"
 	    })
-	    // .when("/user/:login", {
-	    // 	templateUrl : "templates/main.html",
-	    // 	controller  : "MainViewController"
-	    // })
 	    .otherwise({
 	        redirectTo: '/'
 	    });
