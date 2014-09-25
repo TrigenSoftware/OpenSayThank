@@ -1,0 +1,10 @@
+trigen_thank_homepage:
+    path:     /{path}
+    defaults: { _controller: TrigenThankBundle:Thank:index }
+    requirements:
+        path: (|!/.*)  
+
+trigen_thank_api:
+    path:     /api
+    defaults: { _controller: TrigenThankBundle:Thank:api }
+    methods:  [GET, POST]

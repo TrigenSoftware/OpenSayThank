@@ -1,0 +1,16 @@
+{% extends 'TrigenThankBundle:Thank:layout.html.twig' %}
+
+{% block title %}Скажи Спасибо!{% endblock %}
+
+{% block body %}
+	<img src="/img/att8.jpg">
+    <div gt-bg></div>
+    <main gt-counter>
+	    <a gt-say-thank>Спасибо</a> сказали уже
+	    <p><span>105</span> раз</p>
+	    <span>скажите <a gt-say-thank>Спасибо</a> и Вы!</span>
+	</main>
+	<section gt-auth>
+	    Войти через: <a gt-vk href="{{ hwi_oauth_login_url('vkontakte') }}">Вконтакте</a>, <a gt-i href="{{ hwi_oauth_login_url('instagram') }}">Instagram</a> или <a gt-t href="{{ hwi_oauth_login_url('twitter') }}">Twitter</a>.
+	</section>
+{% endblock %}

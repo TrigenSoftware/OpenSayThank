@@ -1,0 +1,28 @@
+{% extends 'TrigenThankBundle:Thank:layout.html.twig' %}
+
+{% block title %}Главная{% endblock %}
+
+{% block body %}
+	<nav gt-fixed-nav class="full">
+		<main>
+	        <ul>
+	        	<li gt-index>
+					<a href="#/" ng-class="{ selected : currentView == 1 }">Главная</a>
+				</li><li gt-follows>
+	            	<a href="#/follows" ng-class="{ selected : currentView == 2 }">Подписки</a>
+	            </li><li gt-followers>
+	            	<a href="#/followers" ng-class="{ selected : currentView == 3 }">Подписчики</a>
+	            </li><li gt-say>
+	            	<a gt-say-thank>Сказать Спасибо</a>
+	            </li>
+	        </ul>
+	        <div gt-say>
+				<a gt-say-thank>Сказать Спасибо</a>
+			</div>
+			<!-- input type="search" placeholder="Поиск" -->
+        </main>
+    </nav>
+    <main ng-view>
+
+    </main>
+{% endblock %}

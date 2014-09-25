@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html ng-app="thankApp">
+	<head>
+		<meta charset="utf-8">
+		<title>{% block title %}{% endblock %}</title>
+
+		{% if app.environment == 'dev' %}
+	        <script defer type="text/javascript" src="/bower_components/jquery/dist/jquery.min.js"></script>
+	        <script defer type="text/javascript" src="/bower_components/angular/angular.min.js"></script>
+	        <script defer type="text/javascript" src="/bower_components/angular-route/angular-route.min.js"></script>
+	        {% if requireLogin is defined and requireLogin %}
+	        	<script defer type="text/javascript" src="/app/login.js"></script>
+	        {% else %}
+	        	<script defer type="text/javascript" src="/app/main.js"></script>
+	        {% endif %}
+			<script async type="text/javascript" src="/bower_components/less.js/dist/less-1.7.5.js"></script>
+			<link rel="stylesheet" type="text/css" href="/bower_components/normalize.css/normalize.css">
+			<link rel="stylesheet" type="text/less" href="/style/style.less">
+		{% else %}
+			{% if requireLogin is defined and requireLogin %}
+	        	<script async type="text/javascript" src="/app/login.min.js"></script>
+	        {% else %}
+	        	<script async type="text/javascript" src="/app/main.min.js"></script>
+	        {% endif %}
+			<link rel="stylesheet" type="text/css" href="/style/style.min.css">
+		{% endif %}
+
+	</head>
+	<body{% if requireLogin is defined and requireLogin %} class="gt-login"{% else %} ng-controller="MainController as main"{% endif %}>
+		{% block body %}{% endblock %}
+		<section gt-modal{% if verify is not defined or not verify %} class="hidden"{% endif %}>
+			<div gt-bg></div>
+			<main{% if verify is defined and verify %} class="verify"{% endif %}>
+				{% if verify is defined and verify %}
+					<header gt-verify>
+						Заполните профиль
+					</header>
+					<form method="post" gt-verify>
+						<div>
+							Email: <input placeholder="необязательно" type="email" name="email">
+						</div>
+						<div>
+							Логин: <input placeholder="обязательно" type="text" name="username" required pattern="[\d\w]{3,255}" value="{{ username }}">
+						</div>
+						<div gt-error{% if userexist is not defined or userexist == false %} class="hidden"{% endif %}>
+							Логин занят другим пользователем.
+						</div>
+						<button gt-green-btn type="submit">Отправить</button>
+					</form>
+				{% else %}
+					<header gt-message>
+						Внимание
+					</header>
+					<div gt-message>
+						Вы только что сказали спасибо. Вот.
+					</div>
+
+					<header gt-thank>
+						Сказать Спасибо
+					</header>
+					<form gt-thank>
+						<div>
+							Кому: <input type="text" name="thankto" required pattern="[\d\w]{3,255}">
+						</div>
+						<textarea name="message" required pattern="[.]{1,100}">Текст сообщения</textarea>
+						<img src="/img/att4.jpg">
+						<section>
+							<a href="#">
+								<span gt-rm-img>Удалить изображение</span>
+								<span gt-add-img>Прикрепить изображение</span>
+								<input type="file" name="attachment" class="hidden">
+							</a>
+							<span>100</span>
+							<button gt-green-btn type="submit" class="disabled">Отправить</button>
+						</section>
+					</form>
+				{% endif %}
+			</main>
+		</section>
+	</body>
+</html>
