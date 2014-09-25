@@ -1,6 +1,3 @@
-parameters:
-#    trigen_thank.example.class: Trigen\Bundle\ThankBundle\Example
-
 services:
     kernel.event_listener.json_request_transformer:
         class: Qandidate\Common\Symfony\HttpKernel\EventListener\JsonRequestTransformerListener
