@@ -10,7 +10,6 @@ gulp.task('script', function() {
     gulp.src(['./web/bower_components/jquery/dist/jquery.min.js', './web/bower_components/angular/angular.min.js', './web/bower_components/angular-route/angular-route.min.js', './web/app/main.js'])
         .pipe(uglify({
             compress: true
-            // mangle: true
         }))
         .pipe(concat('main.min.js', { newLine: ';' }))
         .pipe(gulp.dest('./web/app'));
