@@ -1,3 +1,8 @@
-trigen_user_homepage:
-    path:     /hello/{name}
-    defaults: { _controller: TrigenUserBundle:Default:index }
+trigen_user_login:
+    path:     /login
+    defaults: { _controller: TrigenUserBundle:User:login }
+
+trigen_user_verify:
+    path:     /verify
+    defaults: { _controller: TrigenUserBundle:User:verify }
+    methods:  [GET, POST]

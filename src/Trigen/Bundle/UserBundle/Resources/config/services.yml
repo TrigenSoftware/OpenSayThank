@@ -1,17 +1,23 @@
-parameters:
+# parameters:
 #    trigen_user.example.class: Trigen\Bundle\UserBundle\Example
 
-services:
+# services:
 #    trigen_user.example:
 #        class: %trigen_user.example.class%
 #        arguments: [@service_id, "plain_value", %parameter%]
-
-parameters:
-    user_class_name: Trigen\Bundle\UserBundle\Entity\User
 
 services:
     trigen.aouth_user_provider:
         class: Trigen\Bundle\UserBundle\Entity\OAuthUserProvider
         arguments:
             - @doctrine
-            - %user_class_name%
+
+    trigen.user_listener:
+        class: Trigen\Bundle\UserBundle\EventListener\UserListener
+        arguments: 
+            - @security.context
+            - @router
+
+        tags:
+            # - { name: kernel.event_listener, event: kernel.response, method: onResponse }
+            - { name: kernel.event_listener, event: kernel.request, method: onRequest }

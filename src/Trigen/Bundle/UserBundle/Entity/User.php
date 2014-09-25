@@ -35,6 +35,13 @@ class User implements UserInterface, EquatableInterface, \Serializable
     /**
      * @var string
      *
+     * @ORM\Column(name="photo", type="string", length=255, nullable=true)
+     */
+    private $photo;
+
+    /**
+     * @var string
+     *
      * @ORM\Column(name="salt", type="string", length=100, unique=false)
      */
     private $salt;
@@ -66,6 +73,13 @@ class User implements UserInterface, EquatableInterface, \Serializable
      * @ORM\Column(name="twitter_id", type="string", length=255, nullable=true)
      */
     private $twitterId;
+
+    /**
+     * @var boolean
+     *
+     * @ORM\Column(name="verified", type="boolean", nullable=true)
+     */
+    private $verified = false;
 
 
     public function __construct()
@@ -105,6 +119,29 @@ class User implements UserInterface, EquatableInterface, \Serializable
     public function getUsername()
     {
         return $this->username;
+    }
+
+    /**
+     * Set photo
+     *
+     * @param string $photo
+     * @return User
+     */
+    public function setPhoto($photo)
+    {
+        $this->photo = $photo;
+
+        return $this;
+    }
+
+    /**
+     * Get photo
+     *
+     * @return string 
+     */
+    public function getPhoto()
+    {
+        return $this->photo;
     }
 
     /**
@@ -197,6 +234,29 @@ class User implements UserInterface, EquatableInterface, \Serializable
     public function getTwitterId()
     {
         return $this->twitterId;
+    }
+
+    /**
+     * Set verified
+     *
+     * @param boolean $verified
+     * @return User
+     */
+    public function setVerified($verified)
+    {
+        $this->verified = $verified;
+
+        return $this;
+    }
+
+    /**
+     * Get verified
+     *
+     * @return boolean 
+     */
+    public function getVerified()
+    {
+        return $this->verified;
     }
 
 
