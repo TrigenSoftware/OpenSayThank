@@ -5,6 +5,7 @@
 		<title>{% block title %}{% endblock %}</title>
 
 		{% if app.environment == 'dev' %}
+			<script type="text/javascript">var DEV = true;</script>
 	        <script defer type="text/javascript" src="/bower_components/jquery/dist/jquery.min.js"></script>
 	        <script defer type="text/javascript" src="/bower_components/angular/angular.min.js"></script>
 	        <script defer type="text/javascript" src="/bower_components/angular-route/angular-route.min.js"></script>

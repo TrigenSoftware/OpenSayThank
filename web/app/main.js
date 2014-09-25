@@ -1,5 +1,4 @@
 var ThankApp = angular.module("thankApp", ["ngRoute"]);
-var DEV = true;
 
 function ENV(str) {
 	return ( DEV ? "/app_dev.php" : "" ) + str;
