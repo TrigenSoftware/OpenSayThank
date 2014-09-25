@@ -1,11 +1,3 @@
-# parameters:
-#    trigen_user.example.class: Trigen\Bundle\UserBundle\Example
-
-# services:
-#    trigen_user.example:
-#        class: %trigen_user.example.class%
-#        arguments: [@service_id, "plain_value", %parameter%]
-
 services:
     trigen.aouth_user_provider:
         class: Trigen\Bundle\UserBundle\Entity\OAuthUserProvider
