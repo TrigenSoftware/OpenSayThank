@@ -16,11 +16,11 @@ gulp.task('script', function() {
         .pipe(gulp.dest('./web/app'));
 
     gulp.src(['./web/bower_components/jquery/dist/jquery.min.js', './web/app/login.js'])
-        .pipe(rename('login.min.js'))
         .pipe(uglify({
             compress: true,
             mangle: true
         }))
+        .pipe(concat('login.min.js', { newLine: ';' }))
         .pipe(gulp.dest('./web/app'));
 });
 
