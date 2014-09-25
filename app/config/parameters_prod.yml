@@ -3,9 +3,9 @@ parameters:
     database_driver: pdo_mysql
     database_host: localhost
     database_port: 3306
-    database_name: appliveorg_gthnk
-    database_user: appliveorg_gthnk
-    database_password: moloko
+    database_name: gthnk
+    database_user: root
+    database_password: Kz562pfs4
     mailer_transport: smtp
     mailer_host: 127.0.0.1
     mailer_user: null
