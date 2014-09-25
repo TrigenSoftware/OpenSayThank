@@ -3,6 +3,7 @@
 namespace Trigen\Bundle\ThankBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Request;
 
@@ -25,10 +26,7 @@ class ThankController extends Controller
 
     	$response = array('error' => 'invalid request');
 
-    	$response = new Response(json_encode($response));
-		$response->headers->set('Content-Type', 'application/json');
-
-    	return $response;
+    	return new JsonResponse($response);
     }
 
     private function apiCurrentUserData()
