@@ -33,9 +33,9 @@ gulp.task('script', function() {
 
 gulp.task('style', function() {
     gulp.src(['./web/bower_components/normalize.css/normalize.css', './web/style/style.less'])
-        .pipe(rename('style.min.css'))
         .pipe(less())
         .pipe(csso())
+        .pipe(concat('style.min.css'))
         .pipe(gulp.dest('./web/style'));
 });
 
