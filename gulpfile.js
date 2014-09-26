@@ -8,10 +8,15 @@ var gulp   = require('gulp'),
 
 gulp.task('script', function() {
 
-    gulp.src(['./web/bower_components/jquery/dist/jquery.min.js', './web/bower_components/angular/angular.min.js', './web/bower_components/angular-route/angular-route.min.js', './web/app/main.js'])
-        // .pipe(uglify({
-        //     compress: true
-        // }))
+    gulp.src('./web/app/main.js')
+        .pipe(uglify({
+            compress: true,
+            mangle: true
+        }))
+        .pipe(rename('main.min.js'))
+        .pipe(gulp.dest('./web/app'));
+
+    gulp.src(['./web/bower_components/jquery/dist/jquery.min.js', './web/bower_components/angular/angular.min.js', './web/bower_components/angular-route/angular-route.min.js', './web/app/main.min.js'])
         .pipe(concat('main.min.js', { newLine: '\n' }))
         .pipe(gulp.dest('./web/app'));
 
