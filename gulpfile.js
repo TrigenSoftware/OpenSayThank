@@ -1,5 +1,6 @@
 var gulp   = require('gulp'),
     uglify = require('gulp-uglify'),
+    ng     = require('gulp-ng-annotate')
     concat = require('gulp-concat'),
     less   = require('gulp-less'),
     csso   = require('gulp-minify-css'),
@@ -8,15 +9,12 @@ var gulp   = require('gulp'),
 
 gulp.task('script', function() {
 
-    gulp.src('./web/app/main.js')
+    gulp.src(['./web/bower_components/jquery/dist/jquery.min.js', './web/bower_components/angular/angular.min.js', './web/bower_components/angular-route/angular-route.min.js', './web/app/main.js'])
+        .pipe(ng())
         .pipe(uglify({
             compress: true,
             mangle: true
         }))
-        .pipe(rename('main.min.js'))
-        .pipe(gulp.dest('./web/app'));
-
-    gulp.src(['./web/bower_components/jquery/dist/jquery.min.js', './web/bower_components/angular/angular.min.js', './web/bower_components/angular-route/angular-route.min.js', './web/app/main.min.js'])
         .pipe(concat('main.min.js', { newLine: '\n' }))
         .pipe(gulp.dest('./web/app'));
 
