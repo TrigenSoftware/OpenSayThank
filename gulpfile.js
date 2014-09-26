@@ -7,10 +7,17 @@ var gulp   = require('gulp'),
     rename = require('gulp-rename');
 
 gulp.task('script', function() {
-    gulp.src(['./web/bower_components/jquery/dist/jquery.min.js', './web/bower_components/angular/angular.min.js', './web/bower_components/angular-route/angular-route.min.js', './web/app/main.js'])
+    gulp.src('./web/app/main.js')
         .pipe(uglify({
             compress: true,
             mangle: true
+        }))
+        .pipe(rename('main.min.js'))
+        .pipe(gulp.dest('./web/app'));
+
+    gulp.src(['./web/bower_components/jquery/dist/jquery.min.js', './web/bower_components/angular/angular.min.js', './web/bower_components/angular-route/angular-route.min.js', './web/app/main.min.js'])
+        .pipe(uglify({
+            compress: true
         }))
         .pipe(concat('main.min.js', { newLine: ';' }))
         .pipe(gulp.dest('./web/app'));
@@ -25,7 +32,7 @@ gulp.task('script', function() {
 });
 
 gulp.task('style', function() {
-    gulp.src('./web/style/style.less')
+    gulp.src(['./web/bower_components/normalize.css/normalize.css', './web/style/style.less'])
         .pipe(rename('style.min.css'))
         .pipe(less())
         .pipe(csso())
