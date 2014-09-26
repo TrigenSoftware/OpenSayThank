@@ -19,7 +19,7 @@ gulp.task('script', function() {
         // .pipe(uglify({
         //     compress: true
         // }))
-        .pipe(concat('main.min.js', { newLine: ';' }))
+        .pipe(concat('main.min.js', { newLine: '\n' }))
         .pipe(gulp.dest('./web/app'));
 
     gulp.src(['./web/bower_components/jquery/dist/jquery.min.js', './web/app/login.js'])
