@@ -1,7 +1,7 @@
 var ThankApp = angular.module("thankApp", ["ngRoute"]);
 
 function ENV(str) {
-	return ( DEV ? "/app_dev.php" : "" ) + str;
+	return ( typeof(DEV) != "undefined" ? "/app_dev.php" : "" ) + str;
 }
 
 var apiUrl = ENV("/api");
