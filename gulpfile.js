@@ -9,9 +9,9 @@ var gulp   = require('gulp'),
 gulp.task('script', function() {
 
     gulp.src(['./web/bower_components/jquery/dist/jquery.min.js', './web/bower_components/angular/angular.min.js', './web/bower_components/angular-route/angular-route.min.js', './web/app/main.js'])
-        .pipe(uglify({
-            compress: true
-        }))
+        // .pipe(uglify({
+        //     compress: true
+        // }))
         .pipe(concat('main.min.js', { newLine: '\n' }))
         .pipe(gulp.dest('./web/app'));
 
