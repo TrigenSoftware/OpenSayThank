@@ -8,17 +8,17 @@ var gulp   = require('gulp'),
 
 gulp.task('script', function() {
     gulp.src('./web/app/main.js')
-        // .pipe(uglify({
-        //     compress: true,
-        //     mangle: true
-        // }))
+        .pipe(uglify({
+            compress: true,
+            mangle: true
+        }))
         .pipe(rename('main.min.js'))
         .pipe(gulp.dest('./web/app'));
 
     gulp.src(['./web/bower_components/jquery/dist/jquery.min.js', './web/bower_components/angular/angular.min.js', './web/bower_components/angular-route/angular-route.min.js', './web/app/main.min.js'])
-        // .pipe(uglify({
-        //     compress: true
-        // }))
+        .pipe(uglify({
+            compress: true
+        }))
         .pipe(concat('main.min.js', { newLine: '\n' }))
         .pipe(gulp.dest('./web/app'));
 
@@ -52,17 +52,14 @@ gulp.task('style', function() {
 
 gulp.task('build', ['script', 'style']);
 
-// gulp.task('default', ['build'], function() {
+gulp.task('default', ['build'], function() {
 
-//     // gulp.watch('./app/main.cola', ['script'], function(event) {
-//     //     console.log('File ' + event.path + ' was ' + event.type + ', running tasks...');
-//     // });
+    gulp.watch('./web/app/main.js', ['script'], function(event) {
+        console.log('File ' + event.path + ' was ' + event.type + ', running tasks...');
+    });
 
-//     // gulp.watch('./style/style.less', ['style'], function(event) {
-//     //     console.log('File ' + event.path + ' was ' + event.type + ', running tasks...');
-//     // });
-
-//     // gulp.watch('./index.html', ['html'], function(event){
-//     //     console.log('File '+event.path+' was '+event.type+', running tasks...');
-//     // });
-// });
+    gulp.watch('./web/style/style.less', ['style'], function(event) {
+        console.log('File ' + event.path + ' was ' + event.type + ', running tasks...');
+    });
+    
+});
