@@ -7,11 +7,11 @@
 		<main>
 	        <ul>
 	        	<li gt-index>
-					<a href="#/" ng-class="{ selected : currentView == 1 }">Главная</a>
+					<a ng-href="/" ng-class="{ selected : currentView == 1 }">Главная</a>
 				</li><li gt-follows>
-	            	<a href="#/follows" ng-class="{ selected : currentView == 2 }">Подписки</a>
+	            	<a ng-href="/follows" ng-class="{ selected : currentView == 2 }">Подписки</a>
 	            </li><li gt-followers>
-	            	<a href="#/followers" ng-class="{ selected : currentView == 3 }">Подписчики</a>
+	            	<a ng-href="/followers" ng-class="{ selected : currentView == 3 }">Подписчики</a>
 	            </li><li gt-say>
 	            	<a ng-click="showSayThankModal()">Сказать Спасибо</a>
 	            </li>

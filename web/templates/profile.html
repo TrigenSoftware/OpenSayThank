@@ -2,10 +2,10 @@
 	<article gt-profile-card>
 		<section gt-who>
 			<div gt-photo>
-				<a ng-href="#/user/{{ userData.username }}"><img ng-src="{{ userData.photo }}"></a>
+				<a ng-href="/user/{{ userData.username }}"><img ng-src="{{ userData.photo }}"></a>
 			</div>
 			<div gt-name>
-				<a ng-href="#/user/{{ userData.username }}">@{{ userData.username }}</a><br>
+				<a ng-href="/user/{{ userData.username }}">@{{ userData.username }}</a><br>
 				Получил Cпасибо:<br>
 				<span>{{ userData.gotThanks }}</span>
 			</div>
@@ -13,11 +13,11 @@
 		<section gt-stat>
 			<div>
                 {{ userData.follows }}<br>
-                <a ng-href="#/user/{{ userData.username }}/follows">Подписки</a>
+                <a ng-href="/user/{{ userData.username }}/follows">Подписки</a>
             </div>
             <div>
                 {{ userData.followers }}<br>
-                <a ng-href="#/user/{{ userData.username }}/followers">Подписчики</a>
+                <a ng-href="/user/{{ userData.username }}/followers">Подписчики</a>
             </div>
 			<div>
 				{{ userData.gotFives }}<br>
@@ -40,7 +40,7 @@
 				1. Скажи первое “Спасибо”.<br>Вспомни  момент, когда твой друг сделал приятное тебе, <b>пригласи его (её)</b>.
 			</li>
 			<li>
-				2. Полуйчи первое “Спасибо”.<br><b>Расскажи</b> о позитивной Белке в соц сетях и получи от нее спасибо.
+				2. Получи первое “Спасибо”.<br><b>Расскажи</b> о позитивной Белке в соц сетях и получи от нее спасибо.
 			</li>
 			<li>
 				3. <b>Пригласи</b> больше друзей, возможно им есть за что сказать тебе “Спасибо”.
@@ -53,7 +53,7 @@
 	</ul>
 	<article ng-repeat="thankData in thanks" ng-if="!thankData.removed">
 		<img ng-src="{{ thankData.photo }}">
-		<a ng-href="#/user/{{ thankData.username }}">{{ thankData.username }}</a> <i>&rarr;</i> <a ng-href="#/user/{{ thankData.thankto }}">{{ thankData.thankto }}</a>
+		<a ng-href="/user/{{ thankData.username }}">{{ thankData.username }}</a> <i>&rarr;</i> <a ng-href="/user/{{ thankData.thankto }}">{{ thankData.thankto }}</a>
 		<span>{{ humanTiming(thankData.time) }}</span>
 		<p ng-bind-html="trustAsHtml(thankData.body)"></p>
 		<div ng-if="thankData.attachment" gt-img>

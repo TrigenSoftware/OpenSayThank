@@ -1,120 +1,56 @@
-<!DOCTYPE html>
-<html>
-	<head>
-		<meta charset="utf-8">
-		<script async type="text/javascript" src="/bower_components/jquery/dist/jquery.min.js"></script>
-		<script async type="text/javascript" src="/bower_components/less.js/dist/less-1.7.5.js"></script>
-		<link rel="stylesheet" type="text/css" href="/bower_components/normalize.css/normalize.css">
-		<link rel="stylesheet" type="text/less" href="/style/style.less">
-	</head>
-	<body>
-		<nav gt-fixed-nav class="full">
-			<main>
-		        <ul>
-                    <li gt-index>
-                        <a class="selected">Главная</a>
-                        <sup>5</sup>
-                    </li><li gt-follows>
-                        <a>Подписки</a>
-                    </li><li gt-followers>
-                        <a>Подписчики</a>
-                    </li><li gt-say>
-                        <a gt-say-thank>Сказать Спасибо</a>
-                    </li>
-                </ul>
-		        <div gt-say>
-					<a gt-say-thank>Сказать Спасибо</a>
-				</div>
-				<input type="search" placeholder="Поиск">
-	        </main>
-	    </nav>
-	    <main>
-	    	<section gt-menus>
-	    		<article gt-profile-card>
-	    			<section gt-who>
-	    				<div gt-photo>
-	    					<img src="/img/photo.jpg">
-	    				</div>
-	    				<div gt-name>
-	    					<b>@TonyStark</b><br>
-	    					Получил Cпасибо:<br>
-	    					<span>5634</span>
-	    				</div>
-	    			</section>
-	    			<section gt-stat>
-	    				<div>
-	    					4564<br>
-	    					Подписки
-	    				</div>
-	    				<div>
-	    					4564<br>
-	    					Подписчики
-	    				</div>
-	    				<div>
-	    					4564<br>
-	    					Получил Пять
-	    				</div>
-	    			</section>
-	    			<section gt-actions>
-	    				<button gt-green-btn>Редактировать</button>
-	    				<button gt-orange-btn>Выход</button>
-	    			</section>
-	    		</article>
-	    		<article gt-how-to-start>
-	    			<header>Как начать?</header>
-	    			<ul>
-	    				<li>
-	    					1. Скажи первое “Спасибо”.<br>Вспомни  момент, когда твой друг сделал приятное тебе, <b>пригласи его (её)</b>.
-	    				</li>
-	    				<li>
-	    					2. Полуйчи первое “Спасибо”.<br><b>Расскажи</b> о позитивной Белке в соц сетях и получи от нее спасибо.
-	    				</li>
-	    				<li>
-	    					3. <b>Пригласи</b> больше друзей, возможно им есть за что сказать тебе “Спасибо”.
-	    				</li>
-	    			</ul>
-	    		</article>
-	    		<article gt-invite-friends class="hidden">
-	    			<header>Пригласи друзей из твиттера</header>
-	    			<ul>
-	    				<li>
-	    					<img src="/img/photo.jpg">
-	    					<a href="#">Eric Hoffman</a>
-	    					<button gt-invite-btn>Пригласить</button>
-	    				</li>
-	    				<li>
-	    					<img src="/img/photo.jpg">
-	    					<a href="#">Fabio</a>
-	    					<button gt-invite-btn>Пригласить</button>
-	    				</li>
-	    				<li>
-	    					<img src="/img/photo.jpg">
-	    					<a href="#">Josh Austin</a>
-	    					<button gt-invite-btn>Пригласить</button>
-	    				</li>
-	    				<li>
-	    					<img src="/img/photo.jpg">
-	    					<a href="#">Nadir Balcikli</a>
-	    					<button gt-invite-btn>Пригласить</button>
-	    				</li>
-	    			</ul>
-	    		</article>
-	    	</section>
-	    	<section gt-invite>
-    			<ul gt-nav>
-                    <li class="static">Пригласить друзей из:</li><li class="selected">Twitter</li><li>Instagram</li><li>Vkontakte</li>
-    			</ul>
-    			<article>
-    				<img src="/img/photo.jpg">
-    				<a href="#">Fabio</a>
-    				<button gt-invite-btn>Пригласить</button>
-    			</article>
-                <article>
-                    <img src="/img/att2.jpg">
-                    <a href="#">Vinni</a>
-                    <button gt-invite-btn>Пригласить</button>
-                </article>
-	    	</section>
-	    </main>
-	</body>
-</html>
+<section gt-menus>
+	<article gt-profile-card>
+		<section gt-who>
+			<div gt-photo>
+				<img ng-src="{{ currentUserData.photo }}">
+			</div>
+			<div gt-name>
+				<a>@{{ currentUserData.username }}</a><br>
+				Получил Cпасибо:<br>
+				<span>{{ currentUserData.gotThanks }}</span>
+			</div>
+		</section>
+		<section gt-stat>
+			<div>
+				{{ currentUserData.follows }}<br>
+				<a ng-href="/follows">Подписки</a>
+			</div>
+			<div>
+				{{ currentUserData.followers }}<br>
+				<a ng-href="/followers">Подписчики</a>
+			</div>
+			<div>
+				{{ currentUserData.gotFives }}<br>
+				Получил Пять
+			</div>
+		</section>
+		<section gt-actions>
+			<button gt-green-btn>Пригласить друзей</button>
+			<button gt-orange-btn ng-click="logout()">Выход</button>
+		</section>
+	</article>
+	<article gt-how-to-start>
+		<header>Как начать?</header>
+		<ul>
+			<li>
+				1. Скажи первое “Спасибо”.<br>Вспомни  момент, когда твой друг сделал приятное тебе, <b>пригласи его (её)</b>.
+			</li>
+			<li>
+				2. Получи первое “Спасибо”.<br><b>Расскажи</b> о позитивной Белке в соц сетях и получи от нее спасибо.
+			</li>
+			<li>
+				3. <b>Пригласи</b> больше друзей, возможно им есть за что сказать тебе “Спасибо”.
+			</li>
+		</ul>
+	</article>
+</section>
+<section gt-invite>
+	<ul gt-nav>
+        <li class="static">Пригласить друзей из:</li><li class="selected">Vkontakte</li>
+	</ul>
+	<article ng-repeat="friendData in friends">
+		<img ng-src="{{ friendData.photo_100 }}">
+		<a>{{ friendData.first_name }} {{ friendData.last_name }}</a>
+		<button gt-invite-btn ng-click="inviteVkFriend(friendData)">Пригласить</button>
+	</article>
+</section>

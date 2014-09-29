@@ -6,7 +6,6 @@
 
 		{% block includes %}
 			{% if app.environment == 'dev' %}
-				<script type="text/javascript">var DEV = true;</script>
 		        <script defer type="text/javascript" src="/bower_components/jquery/dist/jquery.min.js"></script>
 
 		        {% if requireLogin is defined and requireLogin %}
@@ -14,7 +13,15 @@
 		        {% endif %}
 
 		        {% if mvc is defined and mvc %}
-		        	<script type="text/javascript">localStorage.currentUsername = "{{ app.user.getUsername() }}";</script>
+		        	<script type="text/javascript">
+		        		{% if app.user and app.user.getUsername() %}
+		        			localStorage.currentUsername = "{{ app.user.getUsername() }}"; 
+		        		{% endif %}
+		        		{% if app.user and app.user.getVkontakteId() %}
+		        			localStorage.currentVkontakteId = "{{ app.user.getVkontakteId() }}";
+		        		{% endif %}
+		        	</script>
+		        	<script defer type="text/javascript" src="//vk.com/js/api/openapi.js"></script>
 			        <script defer type="text/javascript" src="/bower_components/angular/angular.min.js"></script>
 			        <script defer type="text/javascript" src="/bower_components/angular-route/angular-route.min.js"></script>
 		        	<script defer type="text/javascript" src="/app/main.js"></script>
@@ -29,7 +36,15 @@
 		        {% endif %}
 
 		        {% if mvc is defined and mvc %}
-		        	<script type="text/javascript">localStorage.currentUsername = "{{ app.user.getUsername() }}";</script>
+		        	<script type="text/javascript">
+		        		{% if app.user and app.user.getUsername() %}
+		        			localStorage.currentUsername = "{{ app.user.getUsername() }}"; 
+		        		{% endif %}
+		        		{% if app.user and app.user.getVkontakteId() %}
+		        			localStorage.currentVkontakteId = "{{ app.user.getVkontakteId() }}";
+		        		{% endif %}
+		        	</script>
+		        	<script defer type="text/javascript" src="//vk.com/js/api/openapi.js"></script>
 		        	<script async type="text/javascript" src="/app/main.min.js"></script>
 		        {% endif %}
 
@@ -104,7 +119,7 @@
 						<div>
 							Кому: <input ng-model="modal.thankto" type="text" name="thankto" required ng-pattern="/^[\.a-zA-Z0-9_-]{3,255}$/">
 						</div>
-						<textarea ng-model="modal.body" name="message" required ng-minlength="5" ng-maxlength="100" ng-trim="false">Текст сообщения</textarea>
+						<textarea ng-model="modal.body" name="body" required ng-minlength="5" ng-maxlength="100" ng-trim="false">Текст сообщения</textarea>
 						<img ng-src="{{ modal.attachment }}">
 						<section>
 							<p>
@@ -112,7 +127,7 @@
 								<span gt-add-img>Прикрепить изображение</span>
 								<input gt-image-upload="modal.attachment" type="file" name="attachment" ng-class="{ hidden : !!modal.attachment }">
 							</p>
-							<span ng-class="{ hidden : sayThankForm.message.$invalid }">{{ 100 - modal.body.length }}</span>
+							<span ng-class="{ invalid : sayThankForm.body.$invalid }">{{ modalBodyLimit() }}</span>
 							<button gt-green-btn ng-class="{ disabled : sayThankForm.$invalid }" ng-disabled="sayThankForm.$invalid" ng-click="sayThank()">Отправить</button>
 						</section>
 					</form>

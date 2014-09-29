@@ -26,11 +26,7 @@
 	<nav gt-fixed-nav class="full">
 		<main>
 	        <div gt-say>
-		        {% if app.environment == 'dev' %}
-					<a href="/app_dev.php/">Сказать Спасибо</a>
-				{% else %}
-					<a href="/">Сказать Спасибо</a>
-				{% endif %}
+				<a href="/">Сказать Спасибо</a>
 			</div>
         </main>
     </nav>
@@ -38,7 +34,7 @@
     	<section gt-preview>
             <hr>
             <img src="{{ photo }}">
-            <a href="/app_dev.php/#/user/{{ username }}">{{ username }}</a> <i>&rarr;</i> <a href="/app_dev.php/#/user/{{ thankto }}">{{ thankto }}</a>
+            <a href="/user/{{ username }}">{{ username }}</a> <i>&rarr;</i> <a href="/user/{{ thankto }}">{{ thankto }}</a>
             <span id="time"></span>
             <p>{{ body }}</p>
             <script type="text/javascript"> 
@@ -97,7 +93,7 @@
 	        {% endif %}
 			<ul>
 				<li gt-share>
-					Поделиться:<a>vkontakte</a><a>twitter</a>
+					Поделиться:<a href="{{ vkShare }}" target="_blank">vkontakte</a><a href="{{ twShare }}" target="_blank">twitter</a>
 				</li>
 			</ul>
     	</section>

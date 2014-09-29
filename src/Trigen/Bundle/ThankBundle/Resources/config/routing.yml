@@ -1,9 +1,3 @@
-trigen_thank_homepage:
-    path:     /{path}
-    defaults: { _controller: TrigenThankBundle:Thank:index }
-    requirements:
-        path: (|\#/.*)  
-
 trigen_thank_preview:
     path:     /preview/{id}
     defaults: { _controller: TrigenThankBundle:Thank:preview }
@@ -17,3 +11,9 @@ trigen_thank_test_api:
     path:     /test-api
     defaults: { _controller: TrigenThankBundle:Thank:testApi }
     methods:  [GET, POST]
+
+trigen_thank_homepage:
+    path:     /{path}
+    defaults: { _controller: TrigenThankBundle:Thank:index }
+    requirements:
+        path: (|follows|followers|user/.*|invite)  

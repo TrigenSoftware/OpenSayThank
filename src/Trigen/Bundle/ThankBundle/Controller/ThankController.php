@@ -171,11 +171,12 @@ class ThankController extends Controller
 	    	->findOneBy(array('username' => $response['username']));
 
 	    $response = array_merge($response, array(
-    		"photo"      => $user->getPhoto(),
-    		"follows"    => $profile->getFollows(),
-    		"followers"  => $profile->getFollowers(),
-    		"gotThanks"  => $profile->getGotThanks(),
-    		"gotFives"   => $profile->getGotFives()
+    		"photo"       => $user->getPhoto(),
+    		"follows"     => $profile->getFollows(),
+    		"followers"   => $profile->getFollowers(),
+    		"gotThanks"   => $profile->getGotThanks(),
+    		"gotFives"    => $profile->getGotFives(),
+    		"vkontakteId" => $user->getVkontakteId()
     	));
 
     	// if ($response['follows']   === null) $response['follows']   = 0;
@@ -222,17 +223,45 @@ class ThankController extends Controller
     private function apiSearchUser($query, $from = null)
     {
     	$em = $this->getDoctrine()->getManager();
-		return $em
+
+    	if ($from == null) return $em
 			->createQuery(
 			   'SELECT user.username
 			    FROM TrigenUserBundle:User user
-			    WHERE user.username != :username AND lower(user.username) LIKE :query AND user.id > :frm AND user.verified = TRUE
-			    ORDER BY user.id ASC'
+			    WHERE user.username != :username AND lower(user.username) LIKE :query AND user.verified = TRUE
+			    ORDER BY user.id DESC'
 			)
 			->setMaxResults(15)
 			->setParameter('username', $this->getUser()->getUsername())
 			->setParameter('query', "%".strtolower($query)."%")
-			->setParameter('frm', $from === null ? -1 : $from)
+			->getResult();
+
+		else 
+
+		if ($from < 0) return $em
+			->createQuery(
+			   'SELECT user.username
+			    FROM TrigenUserBundle:User user
+			    WHERE user.username != :username AND lower(user.username) LIKE :query AND user.id < :frm AND user.verified = TRUE
+			    ORDER BY user.id DESC'
+			)
+			->setMaxResults(15)
+			->setParameter('username', $this->getUser()->getUsername())
+			->setParameter('query', "%".strtolower($query)."%")
+			->setParameter('frm', abs($from))
+			->getResult();
+
+		else return $em
+			->createQuery(
+			   'SELECT user.username
+			    FROM TrigenUserBundle:User user
+			    WHERE user.username != :username AND lower(user.username) LIKE :query AND user.id > :frm AND user.verified = TRUE
+			    ORDER BY user.id DESC'
+			)
+			->setMaxResults(15)
+			->setParameter('username', $this->getUser()->getUsername())
+			->setParameter('query', "%".strtolower($query)."%")
+			->setParameter('frm', $from)
 			->getResult();
     }
 
@@ -836,7 +865,7 @@ class ThankController extends Controller
 	    $em->persist($five);
         $em->flush();
 
-        $thank->setGotFives($thank->getGotFives() + 1);
+        $thank->setGotFives($thank->getGotFives() + 5);
 
         $em->persist($thank);
         $em->flush();
@@ -879,7 +908,7 @@ class ThankController extends Controller
         $thank = $this->getDoctrine()
 	    	->getRepository('TrigenThankBundle:Thank')
 	    	->findOneBy(array('id' => $id));
-        $thank->setGotFives($thank->getGotFives() - 1);
+        $thank->setGotFives($thank->getGotFives() - 5);
 
         $em->persist($thank);
         $em->flush();
