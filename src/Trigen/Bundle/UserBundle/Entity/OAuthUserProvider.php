@@ -3,8 +3,8 @@
 namespace Trigen\Bundle\UserBundle\Entity;
 
 use HWI\Bundle\OAuthBundle\Security\Core\User\OAuthAwareUserProviderInterface;
-use Symfony\Component\Security\Core\User\UserProviderInterface;
 use HWI\Bundle\OAuthBundle\OAuth\Response\UserResponseInterface;
+use Symfony\Component\Security\Core\User\UserProviderInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\HttpFoundation\Session\Session;
 use Doctrine\Common\Persistence\ManagerRegistry;
@@ -34,8 +34,8 @@ class OAuthUserProvider implements UserProviderInterface, OAuthAwareUserProvider
 
     public function __construct(ManagerRegistry $registry) {
         $this->em = $registry->getManager();
-        $this->users = $this->em->getRepository("Trigen\Bundle\UserBundle\Entity\User"); 
-        $this->profiles = $this->em->getRepository("Trigen\Bundle\UserBundle\Entity\Profile");  
+        $this->users = $this->em->getRepository("TrigenUserBundle:User"); 
+        $this->profiles = $this->em->getRepository("TrigenUserBundle:Profile");  
     }
 
     public function loadUserByOAuthUserResponse(UserResponseInterface $response) {
@@ -68,7 +68,7 @@ class OAuthUserProvider implements UserProviderInterface, OAuthAwareUserProvider
             $user = new User();
             $user->setUsername("$id@$username");
             $user->setPhoto($photo);
-            $user->setLastLogin(new \DateTime());
+            $user->setLastLogin(new \DateTime(null, new \DateTimeZone("GMT")));
             $user->$setId($id);
 
             $this->em->persist($user);
@@ -83,7 +83,7 @@ class OAuthUserProvider implements UserProviderInterface, OAuthAwareUserProvider
             $this->em->persist($profile);
             $this->em->flush();
         } else {
-            $user->setLastLogin(new \DateTime());
+            $user->setLastLogin(new \DateTime(null, new \DateTimeZone("GMT")));
             $user->$setId($id);
 
             $this->em->persist($user);

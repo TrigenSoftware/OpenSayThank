@@ -70,6 +70,9 @@
 })();
 
 $(function(){
+
+    localStorage.clear();
+
 	$("form input").oninvalid(function(e){
         $(e.target).parent().addClass("invalid");
     }).onvalid(function(e){

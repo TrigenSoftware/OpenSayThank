@@ -1,0 +1,105 @@
+{% extends 'TrigenThankBundle:Thank:layout.html.twig' %}
+
+{% block title %}Сказать Спасибо{% endblock %}
+
+{% block includes %}
+	{% if app.environment == 'dev' %}
+		<script async type="text/javascript" src="/bower_components/less.js/dist/less-1.7.5.js"></script>
+		<link rel="stylesheet" type="text/css" href="/bower_components/normalize.css/normalize.css">
+		<link rel="stylesheet" type="text/less" href="/style/style.less">
+	{% else %}
+		<link rel="stylesheet" type="text/css" href="/style/style.min.css">
+	{% endif %}
+{% endblock %}
+
+{% block meta %}
+	<meta name="title" content="{{ username }} &rarr; {{ thankto }}" />
+	<meta name="description" content="{{ flatBody }}" />
+	{% if attachment is defined and attachment %}
+       <link rel="image_src" href="http://saythank.me/attachments/{{ attachment }}" />
+    {% else %}
+    	<link rel="image_src" href="http://saythank.me/logo.png" />
+    {% endif %}
+{% endblock %}
+
+{% block body %}
+	<nav gt-fixed-nav class="full">
+		<main>
+	        <div gt-say>
+		        {% if app.environment == 'dev' %}
+					<a href="/app_dev.php/">Сказать Спасибо</a>
+				{% else %}
+					<a href="/">Сказать Спасибо</a>
+				{% endif %}
+			</div>
+        </main>
+    </nav>
+    <main>
+    	<section gt-preview>
+            <hr>
+            <img src="{{ photo }}">
+            <a href="/app_dev.php/#/user/{{ username }}">{{ username }}</a> <i>&rarr;</i> <a href="/app_dev.php/#/user/{{ thankto }}">{{ thankto }}</a>
+            <span id="time"></span>
+            <p>{{ body }}</p>
+            <script type="text/javascript"> 
+	            Number.prototype.toDualDigit = function() {
+					var str = this + "";
+					return str.length === 1 ? "0" + str : str;
+				};
+
+            	document.querySelector("#time").innerHTML = (function(){
+	            	var time = new Date("{{ time }}"),
+			    		diff = new Date() - time;
+			    	
+			    	if (diff < 60000) return "меньше минуты назад";
+			    	if (diff < 3600000) {
+			    		var min = Math.floor(diff / 60000), lst = min + "";
+			    		lst = lst[lst.length - 1]*1;
+
+			    		if ( min === 1 )
+			    			return "минуту назад";
+			    		else
+			    		if ( lst == 1 && min > 20 )
+			    			return min + " минуту назад";
+			    		else
+			    		if( (lst == 2 || lst == 3 || lst == 4) && (min > 20 || min < 10))
+			    			return min + " минуты назад";
+			    		else 
+			    			return min + " минут назад";
+			    	}
+			    	if (diff < 86400000) {
+			    		var hour = Math.floor(diff / 3600000), lst = hour + "";
+			    		lst = lst[lst.length - 1]*1;
+
+			    		if ( hour === 1 )
+			    			return "час назад";
+			    		else
+			    		if ( lst == 1 && hour > 20 )
+			    			return hour + " час назад";
+			    		else
+			    		if( (lst == 2 || lst == 3 || lst == 4) && (hour > 20 || hour < 10))
+			    			return hour + " часа назад";
+			    		else 
+			    			return hour + " часов назад";
+			     	}
+			     	
+			    	return time.toLocaleDateString("ru-RU", {
+			    		year: "numeric", 
+			    		month: "long", 
+			    		day: "numeric"
+			    	}) + " " + time.getHours().toDualDigit() + ":" + time.getMinutes().toDualDigit();
+			    })();
+            </script>
+            {% if attachment is defined and attachment %}
+	            <div gt-img>
+	                <img src="/attachments/{{ attachment }}">
+	            </div>
+	        {% endif %}
+			<ul>
+				<li gt-share>
+					Поделиться:<a>vkontakte</a><a>twitter</a>
+				</li>
+			</ul>
+    	</section>
+    </main>
+{% endblock %}

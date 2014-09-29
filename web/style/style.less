@@ -117,9 +117,20 @@
 			padding-top: 20px;
 			font-size: 14px;
 
-			b { 
+			a { 
+				text-decoration: none;
+				font-weight: bold;
 				font-size: 16px;
 				line-height: 27px;
+				color: @main-aqua;
+
+				&[href]:hover { 
+					color: lighten(@main-aqua, 10%);
+				}
+
+				&[href]:active { 
+					color: darken(@main-aqua, 5%);
+				}
 			}
 
 			span {
@@ -134,6 +145,19 @@
 		height: 47px;
 		border-top: 1px solid @border-bottom;
 		border-bottom: 1px solid @border-bottom;
+
+		a {
+			text-decoration: none;
+			color: @main-aqua;
+
+			&:hover { 
+				color: lighten(@main-aqua, 10%);
+			}
+
+			&:active { 
+				color: darken(@main-aqua, 5%);
+			}
+		}
 
 		div {
 			.box-sizing(border-box);
@@ -157,6 +181,8 @@
 		[gt-green-btn]  { float: left  }
 
 		button { 
+			padding: 6px 0 4px 0;
+			text-align: center;
 			width: 120px;
 			height: 24px;
 		}
@@ -197,7 +223,7 @@
 		border-radius: 6px;
 		background-color: white;
 		position: fixed;
-		top: 45%;
+		top: 40%;
 		left: 50%;
 		min-width: 300px;
 		min-height: 100px; 
@@ -237,11 +263,11 @@
 
 			&.attached {
 
-				img, a [gt-rm-img] {
+				img, p [gt-rm-img] {
 					display: block;
 				}
 
-				a {
+				p {
 					color: @red;
 
 					&:hover { 
@@ -296,16 +322,17 @@
 				height: 40px;
 				padding-top: 12px;
 				
-				a {
+				p {
+					text-decoration: underline;
+					cursor: pointer;
 					display: block;
-					z-index: 0;
-					background-color: white;
 					position: absolute;
 					left: 15px;
 					top: 12px;
 					font-size: 14px;
 					color: @orange;
 					overflow: hidden;
+					margin: 0;
 
 					[gt-rm-img] {
 						display: none;
@@ -323,9 +350,10 @@
 						position: absolute;
 						top: 0;
 						left: -100px;
-						width: 200%;
-						height: 100%;
+						width: 300%;
+						height: 300%;
 						opacity: 0;
+						cursor: pointer;
 					}
 				}
 
@@ -375,6 +403,10 @@
 			}
 		}
 	}
+}
+
+html {
+	padding-bottom: 30px;
 }
 
 body {
@@ -521,6 +553,8 @@ nav[gt-fixed-nav] {
 
 		[gt-say] a { 
 			cursor: pointer;
+			color: @orange;
+
 			&:hover  { color: lighten(@orange, 15%) }
 			&:active { color: darken(@orange, 5%)   }
 		}
@@ -594,7 +628,7 @@ nav[gt-fixed-nav] {
 
 body > main {
 	width: 910px;
-	margin: 70px auto 0 auto;
+	margin: 70px auto 30px auto;
 
 	[gt-menus] {
 		float: left;
@@ -620,7 +654,7 @@ body > main {
 			&[gt-how-to-start] {
 
 				ul {
-					margin: 0 0 15px 0;
+					margin: 0 5px 15px 0;
 					padding-left: 20px;
 					list-style: none;
 					font-size: 13px; 
@@ -680,7 +714,7 @@ body > main {
 		}
 	}
 
-	section[gt-posts], section[gt-invite], section[gt-follows], section[gt-followers] {
+	section[gt-posts], section[gt-invite], section[gt-follows], section[gt-followers], section[gt-preview] {
 		float: right;
 		width: 590px;
 
@@ -711,11 +745,11 @@ body > main {
 		}
 	}
 
-	section[gt-follows], section[gt-followers] {
+	section[gt-follows], section[gt-followers], section[gt-preview] {
 		width: 100%;
 	}
 
-	[gt-posts] article {
+	section[gt-preview], [gt-posts] article {
 		.box-sizing(border-box);
 		position: relative;
 		width: 100%;
@@ -772,7 +806,9 @@ body > main {
 			padding: 4px 0 2px 0;
 			text-align: center;
 
-			img { max-width: 100% }
+			img { 
+				width: 100%; 
+			}
 		}
 
 		& > ul {
@@ -796,6 +832,14 @@ body > main {
 				text-decoration: none;
 				&:hover  { text-decoration: underline }
 				&:active { color: darken(silver, 10%)  }
+			}
+
+			[gt-share] a {
+				margin-left: 5px;
+
+				&:first-child {
+					margin-left: 7px;
+				}
 			}
 
 			li {
@@ -862,6 +906,26 @@ body > main {
 		&:active { 
 			background-color: lighten(@main-background, 5%);
 			button { background-color: darken(@dark-aqua, 10%) }
+		}
+	}
+
+	section[gt-preview] {
+		float: none;
+		margin: 0 auto;
+		width: 700px;
+		overflow: hidden;
+		border-radius: 4px;
+
+		hr {
+			display: block;
+			background-color: @orange;
+			position: absolute;
+			top: 0;
+			left: 0;
+			width: 100%;
+			height: 6px;
+			margin: 0;
+			border: none;
 		}
 	}
 }

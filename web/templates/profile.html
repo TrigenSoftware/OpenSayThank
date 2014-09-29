@@ -2,31 +2,35 @@
 	<article gt-profile-card>
 		<section gt-who>
 			<div gt-photo>
-				<img ng-src="{{ currentUserData.photo }}">
+				<a ng-href="#/user/{{ userData.username }}"><img ng-src="{{ userData.photo }}"></a>
 			</div>
 			<div gt-name>
-				<a>@{{ currentUserData.username }}</a><br>
+				<a ng-href="#/user/{{ userData.username }}">@{{ userData.username }}</a><br>
 				Получил Cпасибо:<br>
-				<span>{{ currentUserData.gotThanks }}</span>
+				<span>{{ userData.gotThanks }}</span>
 			</div>
 		</section>
 		<section gt-stat>
 			<div>
-				{{ currentUserData.follows }}<br>
-				<a ng-href="#/follows">Подписки</a>
-			</div>
+                {{ userData.follows }}<br>
+                <a ng-href="#/user/{{ userData.username }}/follows">Подписки</a>
+            </div>
+            <div>
+                {{ userData.followers }}<br>
+                <a ng-href="#/user/{{ userData.username }}/followers">Подписчики</a>
+            </div>
 			<div>
-				{{ currentUserData.followers }}<br>
-				<a ng-href="#/followers">Подписчики</a>
-			</div>
-			<div>
-				{{ currentUserData.gotFives }}<br>
+				{{ userData.gotFives }}<br>
 				Получил Пять
 			</div>
 		</section>
 		<section gt-actions>
-			<button gt-green-btn>Пригласить друзей</button>
-			<button gt-orange-btn ng-click="logout()">Выход</button>
+			<div ng-if="userData.follow">
+                <button gt-green-btn>Наблюдаю</button>
+                <button gt-red-btn ng-click="unfollow(userData)">Отмена</button>
+            </div>
+            <button ng-if="!userData.follow" gt-green-btn ng-click="follow(userData)">Наблюдать</button>
+            <button gt-orange-btn ng-click="showSayThankModal(userData)">Сказать Спасибо</button>
 		</section>
 	</article>
 	<article gt-how-to-start>
@@ -42,8 +46,7 @@
 				3. <b>Пригласи</b> больше друзей, возможно им есть за что сказать тебе “Спасибо”.
 			</li>
 		</ul>
-	</article>
-</section>
+	</article></section>
 <section gt-posts>
 	<ul gt-nav>
 		<li ng-class="{ selected : currentView == 1 }" ng-click="setIndexView(1)">Лента</li><li ng-class="{ selected : currentView == 2 }" ng-click="setIndexView(2)">Сказал</li><li ng-class="{ selected : currentView == 3 }" ng-click="setIndexView(3)">Получил</li>

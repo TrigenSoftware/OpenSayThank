@@ -13,13 +13,13 @@
 	            </li><li gt-followers>
 	            	<a href="#/followers" ng-class="{ selected : currentView == 3 }">Подписчики</a>
 	            </li><li gt-say>
-	            	<a gt-say-thank>Сказать Спасибо</a>
+	            	<a ng-click="showSayThankModal()">Сказать Спасибо</a>
 	            </li>
 	        </ul>
 	        <div gt-say>
-				<a gt-say-thank>Сказать Спасибо</a>
+				<a ng-click="showSayThankModal()">Сказать Спасибо</a>
 			</div>
-			<!-- input type="search" placeholder="Поиск" -->
+			<input type="search" name="search" ng-model="searchQuery" ng-change="search()" placeholder="Поиск">
         </main>
     </nav>
     <main ng-view>

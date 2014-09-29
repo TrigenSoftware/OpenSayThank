@@ -36,6 +36,48 @@ class Profile
     private $email;
 
     /**
+     * @var integer
+     *
+     * @ORM\Column(name="follows", type="integer", nullable=true)
+     */
+    private $follows = 0;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="followers", type="integer", nullable=true)
+     */
+    private $followers = 0;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="said_thanks", type="integer", nullable=true)
+     */
+    private $saidThanks = 0;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="got_thanks", type="integer", nullable=true)
+     */
+    private $gotThanks = 0;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="gave_fives", type="integer", nullable=true)
+     */
+    private $gaveFives = 0;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="got_fives", type="integer", nullable=true)
+     */
+    private $gotFives = 0;
+
+    /**
      * @var string
      *
      * @ORM\Column(name="vkontakte_photo", type="string", length=255, nullable=true)
@@ -153,6 +195,144 @@ class Profile
     public function getEmail()
     {
         return $this->email;
+    }
+
+    /**
+     * Set follows
+     *
+     * @param string $follows
+     * @return Profile
+     */
+    public function setFollows($follows)
+    {
+        $this->follows = $follows;
+
+        return $this;
+    }
+
+    /**
+     * Get follows
+     *
+     * @return string 
+     */
+    public function getFollows()
+    {
+        return $this->follows;
+    }
+
+    /**
+     * Set followers
+     *
+     * @param string $followers
+     * @return Profile
+     */
+    public function setFollowers($followers)
+    {
+        $this->followers = $followers;
+
+        return $this;
+    }
+
+    /**
+     * Get followers
+     *
+     * @return string 
+     */
+    public function getFollowers()
+    {
+        return $this->followers;
+    }
+
+    /**
+     * Set saidThanks
+     *
+     * @param string $saidThanks
+     * @return Profile
+     */
+    public function setSaidThanks($saidThanks)
+    {
+        $this->saidThanks = $saidThanks;
+
+        return $this;
+    }
+
+    /**
+     * Get saidThanks
+     *
+     * @return string 
+     */
+    public function getSaidThanks()
+    {
+        return (int)$this->saidThanks;
+    }
+
+    /**
+     * Set gotThanks
+     *
+     * @param string $gotThanks
+     * @return Profile
+     */
+    public function setGotThanks($gotThanks)
+    {
+        $this->gotThanks = $gotThanks;
+
+        return $this;
+    }
+
+    /**
+     * Get gotThanks
+     *
+     * @return string 
+     */
+    public function getGotThanks()
+    {
+        return (int)$this->gotThanks;
+    }
+
+    /**
+     * Set gaveFives
+     *
+     * @param string $gaveFives
+     * @return Profile
+     */
+    public function setGaveFives($gaveFives)
+    {
+        $this->gaveFives = $gaveFives;
+
+        return $this;
+    }
+
+    /**
+     * Get gaveFives
+     *
+     * @return string 
+     */
+    public function getGaveFives()
+    {
+        return (int)$this->gaveFives;
+    }
+
+    /**
+     * Set gotFives
+     *
+     * @param string $gotFives
+     * @return Profile
+     */
+    public function setGotFives($gotFives)
+    {
+        $this->gotFives = $gotFives;
+
+        return $this;
+    }
+
+    /**
+     * Get gotFives
+     *
+     * @return string 
+     */
+    public function getGotFives()
+    {
+        return (int)$this->gotFives;
     }
 
     /**

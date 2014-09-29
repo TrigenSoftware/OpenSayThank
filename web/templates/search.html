@@ -1,9 +1,9 @@
 <section gt-follows>
-	<ul gt-nav class="static">
-		<li>Ваши подписки</li>
-	</ul>
+    <ul gt-nav class="static">
+        <li>Результаты поиска</li>
+    </ul>
     <main>
-        <article gt-profile-card ng-repeat="userData in follows">
+        <article gt-profile-card ng-repeat="userData in searchResult">
             <section gt-who>
                 <div gt-photo>
                     <a ng-href="#/user/{{ userData.username }}"><img ng-src="{{ userData.photo }}"></a>

@@ -47,6 +47,7 @@ class UserListener {
     	return preg_match("/^\/\w+(\/\w+|)$/", $path) && (
     		strpos($path, "/connect") !== false || 
     		strpos($path, "/login")   !== false ||
+    		strpos($path, "/preview")   !== false ||
     		( $path == "/verify" && $logined )  ||
     		$path == "/logout" 
     	);

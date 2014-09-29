@@ -1,37 +1,78 @@
 <!DOCTYPE html>
-<html ng-app="thankApp">
+<html{% if mvc is defined and mvc %} ng-app="thankApp"{% endif %}>
 	<head>
-		<meta charset="utf-8">
+		<meta http-equiv="content-type" content="text/html; charset=utf-8" />
 		<title>{% block title %}{% endblock %}</title>
 
-		{% if app.environment == 'dev' %}
-			<script type="text/javascript">var DEV = true;</script>
-	        <script defer type="text/javascript" src="/bower_components/jquery/dist/jquery.min.js"></script>
-	        <script defer type="text/javascript" src="/bower_components/angular/angular.min.js"></script>
-	        <script defer type="text/javascript" src="/bower_components/angular-route/angular-route.min.js"></script>
-	        {% if requireLogin is defined and requireLogin %}
-	        	<script defer type="text/javascript" src="/app/login.js"></script>
-	        {% else %}
-	        	<script defer type="text/javascript" src="/app/main.js"></script>
-	        {% endif %}
-			<script async type="text/javascript" src="/bower_components/less.js/dist/less-1.7.5.js"></script>
-			<link rel="stylesheet" type="text/css" href="/bower_components/normalize.css/normalize.css">
-			<link rel="stylesheet" type="text/less" href="/style/style.less">
-		{% else %}
-			{% if requireLogin is defined and requireLogin %}
-	        	<script async type="text/javascript" src="/app/login.min.js"></script>
-	        {% else %}
-	        	<script async type="text/javascript" src="/app/main.min.js"></script>
-	        {% endif %}
-			<link rel="stylesheet" type="text/css" href="/style/style.min.css">
+		{% block includes %}
+			{% if app.environment == 'dev' %}
+				<script type="text/javascript">var DEV = true;</script>
+		        <script defer type="text/javascript" src="/bower_components/jquery/dist/jquery.min.js"></script>
+
+		        {% if requireLogin is defined and requireLogin %}
+		        	<script defer type="text/javascript" src="/app/login.js"></script>
+		        {% endif %}
+
+		        {% if mvc is defined and mvc %}
+		        	<script type="text/javascript">localStorage.currentUsername = "{{ app.user.getUsername() }}";</script>
+			        <script defer type="text/javascript" src="/bower_components/angular/angular.min.js"></script>
+			        <script defer type="text/javascript" src="/bower_components/angular-route/angular-route.min.js"></script>
+		        	<script defer type="text/javascript" src="/app/main.js"></script>
+		        {% endif %}
+
+				<script async type="text/javascript" src="/bower_components/less.js/dist/less-1.7.5.js"></script>
+				<link rel="stylesheet" type="text/css" href="/bower_components/normalize.css/normalize.css">
+				<link rel="stylesheet" type="text/less" href="/style/style.less">
+			{% else %}
+				{% if requireLogin is defined and requireLogin %}
+		        	<script async type="text/javascript" src="/app/login.min.js"></script>
+		        {% endif %}
+
+		        {% if mvc is defined and mvc %}
+		        	<script type="text/javascript">localStorage.currentUsername = "{{ app.user.getUsername() }}";</script>
+		        	<script async type="text/javascript" src="/app/main.min.js"></script>
+		        {% endif %}
+
+				<link rel="stylesheet" type="text/css" href="/style/style.min.css">
+			{% endif %}
+		{% endblock %}
+
+		{% block meta %}{% endblock %}
+	</head>
+	<body
+		{% if requireLogin is defined and requireLogin %} 
+			class="gt-login"
 		{% endif %}
 
-	</head>
-	<body{% if requireLogin is defined and requireLogin %} class="gt-login"{% else %} ng-controller="MainController as main"{% endif %}>
+		{% if mvc is defined and mvc %}
+			ng-controller="MainController as main" gt-load-next="loadNext()"
+		{% endif %}>
+
 		{% block body %}{% endblock %}
-		<section gt-modal{% if verify is not defined or not verify %} class="hidden"{% endif %}>
-			<div gt-bg></div>
-			<main{% if verify is defined and verify %} class="verify"{% endif %}>
+
+		<section gt-modal
+			{% if verify is not defined or not verify %} 
+				class="hidden"
+			{% endif %}
+
+			{% if mvc is defined and mvc %} 
+				ng-class="{ hidden : !modalState }"
+			{% endif %}>
+
+			<div gt-bg
+				{% if mvc is defined and mvc %} 
+					ng-click="hideModal()"
+				{% endif %}></div>
+
+			<main
+				{% if verify is defined and verify %} 
+					class="verify"
+				{% endif %}
+
+				{% if mvc is defined and mvc %} 
+					ng-class="{ thank : modalState == 1, message : modalState == 2 }"
+				{% endif %}>
+
 				{% if verify is defined and verify %}
 					<header gt-verify>
 						Заполните профиль
@@ -41,41 +82,41 @@
 							Email: <input placeholder="необязательно" type="email" name="email">
 						</div>
 						<div>
-							Логин: <input placeholder="обязательно" type="text" name="username" required pattern="[\d\w]{3,255}" value="{{ username }}">
+							Логин: <input placeholder="обязательно" type="text" name="username" required pattern="^[a-z0-9_-]{3,255}$" value="{{ username }}">
 						</div>
 						<div gt-error{% if userexist is not defined or userexist == false %} class="hidden"{% endif %}>
 							Логин занят другим пользователем.
 						</div>
 						<button gt-green-btn type="submit">Отправить</button>
 					</form>
-				{% else %}
+				{% else %}{% raw %}
 					<header gt-message>
-						Внимание
+						{{ modal.title }}
 					</header>
 					<div gt-message>
-						Вы только что сказали спасибо. Вот.
+						{{ modal.body }}
 					</div>
 
 					<header gt-thank>
-						Сказать Спасибо
+						{{ modal.title }}
 					</header>
-					<form gt-thank>
+					<form novalidate gt-thank name="sayThankForm" ng-class="{ attached : !!modal.attachment }">
 						<div>
-							Кому: <input type="text" name="thankto" required pattern="[\d\w]{3,255}">
+							Кому: <input ng-model="modal.thankto" type="text" name="thankto" required ng-pattern="/^[a-z0-9_-]{3,255}$/">
 						</div>
-						<textarea name="message" required pattern="[.]{1,100}">Текст сообщения</textarea>
-						<img src="/img/att4.jpg">
+						<textarea ng-model="modal.body" name="message" required ng-minlength="5" ng-maxlength="100" ng-trim="false">Текст сообщения</textarea>
+						<img ng-src="{{ modal.attachment }}">
 						<section>
-							<a href="#">
-								<span gt-rm-img>Удалить изображение</span>
+							<p>
+								<span gt-rm-img ng-click="removeAttachment()">Удалить изображение</span>
 								<span gt-add-img>Прикрепить изображение</span>
-								<input type="file" name="attachment" class="hidden">
-							</a>
-							<span>100</span>
-							<button gt-green-btn type="submit" class="disabled">Отправить</button>
+								<input gt-image-upload="modal.attachment" type="file" name="attachment" ng-class="{ hidden : !!modal.attachment }">
+							</p>
+							<span ng-class="{ hidden : sayThankForm.message.$invalid }">{{ 100 - modal.body.length }}</span>
+							<button gt-green-btn ng-class="{ disabled : sayThankForm.$invalid }" ng-disabled="sayThankForm.$invalid" ng-click="sayThank()">Отправить</button>
 						</section>
 					</form>
-				{% endif %}
+				{% endraw %}{% endif %}
 			</main>
 		</section>
 	</body>

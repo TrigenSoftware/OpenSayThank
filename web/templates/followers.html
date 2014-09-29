@@ -3,162 +3,38 @@
 		<li>Ваши подписчики</li>
 	</ul>
     <main>
-		<article gt-profile-card>
+		<article gt-profile-card ng-repeat="userData in followers">
             <section gt-who>
                 <div gt-photo>
-                    <img src="/img/photo.jpg">
+                    <a ng-href="#/user/{{ userData.username }}"><img ng-src="{{ userData.photo }}"></a>
                 </div>
                 <div gt-name>
-                    <b>@TonyStark</b><br>
+                    <a ng-href="#/user/{{ userData.username }}">@{{ userData.username }}</a><br>
                     Получил Cпасибо:<br>
-                    <span>5634</span>
+                    <span>{{ userData.gotThanks }}</span>
                 </div>
             </section>
             <section gt-stat>
                 <div>
-                    4564<br>
-                    Подписки
+                    {{ userData.follows }}<br>
+                    <a ng-href="#/user/{{ userData.username }}/follows">Подписки</a>
                 </div>
                 <div>
-                    4564<br>
-                    Подписчики
+                    {{ userData.followers }}<br>
+                    <a ng-href="#/user/{{ userData.username }}/followers">Подписчики</a>
                 </div>
                 <div>
-                    4564<br>
+                    {{ userData.gotFives }}<br>
                     Получил Пять
                 </div>
             </section>
             <section gt-actions>
-                <div>
+                <div ng-if="userData.follow">
                     <button gt-green-btn>Наблюдаю</button>
-                    <button gt-red-btn>Отмена</button>
+                    <button gt-red-btn ng-click="unfollow(userData)">Отмена</button>
                 </div>
-                <button gt-orange-btn>Сказать Спасибо</button>
-            </section>
-        </article><article gt-profile-card>
-            <section gt-who>
-                <div gt-photo>
-                    <img src="/img/att2.jpg">
-                </div>
-                <div gt-name>
-                    <b>@TonyStark</b><br>
-                    Получил Cпасибо:<br>
-                    <span>5634</span>
-                </div>
-            </section>
-            <section gt-stat>
-                <div>
-                    4564<br>
-                    Подписки
-                </div>
-                <div>
-                    4564<br>
-                    Подписчики
-                </div>
-                <div>
-                    4564<br>
-                    Получил Пять
-                </div>
-            </section>
-            <section gt-actions>
-                <button gt-green-btn>Наблюдать</button>
-                <button gt-orange-btn>Сказать Спасибо</button>
-            </section>
-        </article><article gt-profile-card>
-            <section gt-who>
-                <div gt-photo>
-                    <img src="/img/photo.jpg">
-                </div>
-                <div gt-name>
-                    <b>@TonyStark</b><br>
-                    Получил Cпасибо:<br>
-                    <span>5634</span>
-                </div>
-            </section>
-            <section gt-stat>
-                <div>
-                    4564<br>
-                    Подписки
-                </div>
-                <div>
-                    4564<br>
-                    Подписчики
-                </div>
-                <div>
-                    4564<br>
-                    Получил Пять
-                </div>
-            </section>
-            <section gt-actions>
-                <div>
-                    <button gt-green-btn>Наблюдаю</button>
-                    <button gt-red-btn>Отмена</button>
-                </div>
-                <button gt-orange-btn>Сказать Спасибо</button>
-            </section>
-        </article><article gt-profile-card>
-            <section gt-who>
-                <div gt-photo>
-                    <img src="/img/photo.jpg">
-                </div>
-                <div gt-name>
-                    <b>@TonyStark</b><br>
-                    Получил Cпасибо:<br>
-                    <span>5634</span>
-                </div>
-            </section>
-            <section gt-stat>
-                <div>
-                    4564<br>
-                    Подписки
-                </div>
-                <div>
-                    4564<br>
-                    Подписчики
-                </div>
-                <div>
-                    4564<br>
-                    Получил Пять
-                </div>
-            </section>
-            <section gt-actions>
-                <div>
-                    <button gt-green-btn>Наблюдаю</button>
-                    <button gt-red-btn>Отмена</button>
-                </div>
-                <button gt-orange-btn>Сказать Спасибо</button>
-            </section>
-        </article><article gt-profile-card>
-            <section gt-who>
-                <div gt-photo>
-                    <img src="/img/photo.jpg">
-                </div>
-                <div gt-name>
-                    <b>@TonyStark</b><br>
-                    Получил Cпасибо:<br>
-                    <span>5634</span>
-                </div>
-            </section>
-            <section gt-stat>
-                <div>
-                    4564<br>
-                    Подписки
-                </div>
-                <div>
-                    4564<br>
-                    Подписчики
-                </div>
-                <div>
-                    4564<br>
-                    Получил Пять
-                </div>
-            </section>
-            <section gt-actions>
-                <div>
-                    <button gt-green-btn>Наблюдаю</button>
-                    <button gt-red-btn>Отмена</button>
-                </div>
-                <button gt-orange-btn>Сказать Спасибо</button>
+                <button ng-if="!userData.follow" gt-green-btn ng-click="follow(userData)">Наблюдать</button>
+                <button gt-orange-btn ng-click="showSayThankModal(userData)">Сказать Спасибо</button>
             </section>
         </article>
     </main>
