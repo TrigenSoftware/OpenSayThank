@@ -82,7 +82,7 @@
 							Email: <input placeholder="необязательно" type="email" name="email">
 						</div>
 						<div>
-							Логин: <input placeholder="обязательно" type="text" name="username" required pattern="^[a-z0-9_-]{3,255}$" value="{{ username }}">
+							Логин: <input placeholder="обязательно" type="text" name="username" required pattern="^[a-zA-Z0-9_-\.]{3,255}$" value="{{ username }}">
 						</div>
 						<div gt-error{% if userexist is not defined or userexist == false %} class="hidden"{% endif %}>
 							Логин занят другим пользователем.
@@ -102,7 +102,7 @@
 					</header>
 					<form novalidate gt-thank name="sayThankForm" ng-class="{ attached : !!modal.attachment }">
 						<div>
-							Кому: <input ng-model="modal.thankto" type="text" name="thankto" required ng-pattern="/^[a-z0-9_-]{3,255}$/">
+							Кому: <input ng-model="modal.thankto" type="text" name="thankto" required ng-pattern="/^[a-zA-Z0-9_-\.]{3,255}$/">
 						</div>
 						<textarea ng-model="modal.body" name="message" required ng-minlength="5" ng-maxlength="100" ng-trim="false">Текст сообщения</textarea>
 						<img ng-src="{{ modal.attachment }}">

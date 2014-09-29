@@ -26,7 +26,7 @@ class UserController extends Controller
 	    	$users = $this->getDoctrine()->getRepository('TrigenUserBundle:User');
 	    	$userexist = $users->findOneBy(array('username' => $newUsername));
 	    	
-	    	if (!$userexist && preg_match("/^[a-z0-9_-]{3,255}$/", $newUsername) 
+	    	if (!$userexist && preg_match("/^[a-zA-Z0-9_-\.]{3,255}$/", $newUsername) 
 	    		&& (!$email 
 	    			? true 
 	    			: preg_match("/^[-a-z0-9!#$%&'*+\/=?^_`{|}~]+(?:\.[-a-z0-9!#$%&'*+\/=?^_`{|}~]+)*@(?:[a-z0-9]([-a-z0-9]{0,61}[a-z0-9])?\.)*(?:aero|arpa|asia|biz|cat|com|coop|edu|gov|info|int|jobs|mil|mobi|museum|name|net|org|pro|tel|travel|[a-z][a-z])$/", $email)

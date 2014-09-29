@@ -243,7 +243,7 @@ class ThankController extends Controller
 
     	foreach ($users as $user) {
     		$tmp = $this->apiUserData($user['username']);
-    		if ($tmp) $res[] = $temp;
+    		if ($tmp) $res[] = $tmp;
     	}
 
     	return $res;
