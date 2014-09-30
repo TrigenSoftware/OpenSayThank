@@ -26,7 +26,7 @@ var apiUrl = "/api",
 	VK_ID = 4545689;
 
 function AUTH(data) {
-	if (data.error && data.error == "access denied" && typeof debug === "undefined")
+	if (data.error && data.error == "access denied" && typeof DEBUG === "undefined")
 		location.href = "/login";
 }
 
