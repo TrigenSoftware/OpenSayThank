@@ -23,11 +23,12 @@ var apiUrl = "/api",
 		MESSAGE: 2
 	},
 
-	VK_ID = 4541892; //4545689;
+	VK_ID = 4545689;
 
 function AUTH(data) {
 	if (data.error && data.error == "access denied")
-		location.href = "/login";
+		console.log("api access denied");
+		//location.href = "/login";
 }
 
 var observersStorage = [];

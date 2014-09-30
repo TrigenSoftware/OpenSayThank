@@ -50,7 +50,7 @@ class UserListener {
     		strpos($path, "/login")   !== false ||
     		strpos($path, "/preview")   !== false ||
     		( $path == "/verify" && $logined )  ||
-    		$path == "/logout" 
+    		$path == "/logout" || $path == "/api" 
     	);
     }
 }
