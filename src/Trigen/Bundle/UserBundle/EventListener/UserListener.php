@@ -30,7 +30,6 @@ class UserListener {
         
         if ($isAnon && !$this->isSafePath($path)) {
 	        $redirect = "trigen_user_login";
-	        // session_unset();
 		} else
 
 		if (!$isAnon && !$currentUser->getVerified() && !$this->isSafePath($path, true)) {

@@ -27,8 +27,7 @@ var apiUrl = "/api",
 
 function AUTH(data) {
 	if (data.error && data.error == "access denied")
-		console.log("api access denied");
-		//location.href = "/login";
+		location.href = "/login";
 }
 
 var observersStorage = [];
