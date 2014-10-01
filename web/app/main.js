@@ -28,6 +28,7 @@ var apiUrl = "/api",
 function AUTH(data) {
 	if (data.error && data.error == "access denied" && typeof DEBUG === "undefined")
 		location.href = "/login";
+	else console.log("auth access denied");
 }
 
 var observersStorage = [];
@@ -543,7 +544,7 @@ ThankApp.controller("ProfileViewController", [ "$scope", "$http", "$location", "
 	        	if (data.error) return;
 
 	        	$scope.userData = data;
-	        	if (!$scope.thanks.length) $scope.setIndexView(INDEX_VIEWS.FEED);
+	        	if ($scope.currentView === null) $scope.setIndexView(INDEX_VIEWS.FEED);
 	        });
 	});
 

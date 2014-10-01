@@ -10,7 +10,11 @@ class UserController extends Controller
 {
     public function loginAction()
     {
-        return $this->render('TrigenUserBundle:Thank:login.html.twig', array( "requireLogin" => true ));
+    	$count = $this->get('trigen.thank_controller')->apiThanksCount();
+        return $this->render('TrigenUserBundle:Thank:login.html.twig', array( 
+        	"requireLogin" => true,
+        	"thanksCount"  => $count['count']
+        ));
     }
 
     public function verifyAction(Request $request)

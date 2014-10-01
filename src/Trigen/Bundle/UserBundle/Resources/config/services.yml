@@ -1,4 +1,9 @@
 services:
+    trigen.thank_controller:
+        class: Trigen\Bundle\ThankBundle\Controller\ThankController
+        calls:
+            - [setContainer, ["@service_container"]]
+
     trigen.aouth_user_provider:
         class: Trigen\Bundle\UserBundle\Entity\OAuthUserProvider
         arguments:

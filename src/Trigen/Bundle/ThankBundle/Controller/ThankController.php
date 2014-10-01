@@ -146,7 +146,7 @@ class ThankController extends Controller
     }
 
 
-    private function apiThanksCount()
+    public function apiThanksCount()
     {
     	$em = $this->getDoctrine()->getManager();
 
