@@ -59,11 +59,13 @@ class UserController extends Controller
 	    }
 
     	$username = preg_replace("/[\d\w]+@/", "", $username);
+    	$count = $this->get('trigen.thank_controller')->apiThanksCount();
 
         return $this->render('TrigenUserBundle:Thank:login.html.twig', array(
         	"username"     => $newUsername ? $newUsername : $username,
         	"userexist"    => $userexist,
         	"requireLogin" => true,
+        	"thanksCount"  => $count['count'],
         	"verify"       => $request->get("_route") == 'trigen_user_verify' && !$this->getUser()->getVerified()
         ));
     }
