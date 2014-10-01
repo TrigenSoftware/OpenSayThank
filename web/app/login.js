@@ -69,6 +69,12 @@
 
 })();
 
+function setThankCount() {
+    $.post("/api", { action: "thanksCount"}, function(data) {
+        $("[gt-count]").html(data.count);
+    });
+}
+
 $(function(){
 
     localStorage.clear();
@@ -82,4 +88,7 @@ $(function(){
     $("form").submit(function(){
     	if ($(this).find(".invalid").length) return false;
     });
+
+    setThankCount();
+    setInterval(setThankCount, 5000);
 });

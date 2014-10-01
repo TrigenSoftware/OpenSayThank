@@ -31,7 +31,12 @@ class ThankController extends Controller
 
     public function apiAction(Request $request)
     {
-    	if ($this->getUser() === null) {
+    	if ($request->request->get("action") === "thanksCount") {
+    		$response = $this->apiThanksCount();
+    	} else 
+
+
+    	if ($this->getUser() === null || !$this->getUser()->getVerified()) {
     		$response = array( 'error' => 'access denied' );
     	} else 
 
@@ -127,6 +132,11 @@ class ThankController extends Controller
     	} else 
 
 
+    	if ($request->request->get("action") === "setInvited") {
+    		$response = $this->apiSetInvited();
+    	} else 
+
+
     	$response = array( 'error' => 'invalid request' );
 
 
@@ -136,7 +146,23 @@ class ThankController extends Controller
     }
 
 
-    private function apiCheckRelationFollow($username) {
+    private function apiThanksCount()
+    {
+    	$em = $this->getDoctrine()->getManager();
+
+    	$count = $em
+			->createQuery(
+			   'SELECT COUNT(thank.id)
+			    FROM TrigenThankBundle:Thank thank'
+			)
+			->getResult();
+
+		return array( "count" => $count[0][1]*1);
+    }
+
+
+    private function apiCheckRelationFollow($username) 
+    {
     	return $this->getDoctrine()
 	    	->getRepository('TrigenThankBundle:Relation')
 	    	->findOneBy(array(
@@ -145,7 +171,8 @@ class ThankController extends Controller
 	    	)) !== null;
     }
 
-    private function apiCheckRelationFollower($username) {
+    private function apiCheckRelationFollower($username) 
+    {
     	return $this->getDoctrine()
 	    	->getRepository('TrigenThankBundle:Relation')
 	    	->findOneBy(array(
@@ -175,7 +202,9 @@ class ThankController extends Controller
     		"follows"     => $profile->getFollows(),
     		"followers"   => $profile->getFollowers(),
     		"gotThanks"   => $profile->getGotThanks(),
+    		"saidThanks"  => $profile->getSaidThanks(),
     		"gotFives"    => $profile->getGotFives(),
+    		"invited"     => $profile->getInvited(),
     		"vkontakteId" => $user->getVkontakteId()
     	));
 
@@ -217,6 +246,25 @@ class ThankController extends Controller
     	// if ($response['gotThanks'] === null) $response['gotThanks'] = 0;
 
     	return $response;
+    }
+
+
+    private function apiSetInvited()
+    {
+    	$profile = $this->getDoctrine()
+	    	->getRepository('TrigenUserBundle:Profile')
+	    	->findOneBy(array('username' => $this->getUser()->getUsername()));
+
+	    if ($profile === null) return null;
+
+	    $em = $this->getDoctrine()->getManager();
+
+	    $profile->setInvited(true);
+
+	    $em->persist($profile);
+        $em->flush();
+
+        return array( "success" => true );
     }
 
 
@@ -940,7 +988,7 @@ class ThankController extends Controller
     {
     	$browser = new Browser();
 		$response = $browser->get('http://po.st/api/shorten?longUrl=http%3A%2F%2Fradiumone.com%2F&apiKey=0411652B-9C21-4B86-8EFA-80AE3D021A13&format=txt');
-		// var_dump($response);
+		var_dump($this->apiThanksCount());
     	return new Response($response->getContent());
     }
 }

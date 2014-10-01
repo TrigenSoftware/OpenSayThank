@@ -5,6 +5,8 @@
 		<title>{% block title %}{% endblock %}</title>
 
 		{% block includes %}
+			<script type="text/javascript">var ENV = "{{ app.environment }}";</script>
+
 			{% if app.environment == 'dev' %}
 		        <script defer type="text/javascript" src="/bower_components/jquery/dist/jquery.min.js"></script>
 
@@ -32,7 +34,7 @@
 				<link rel="stylesheet" type="text/less" href="/style/style.less">
 			{% else %}
 				{% if requireLogin is defined and requireLogin %}
-		        	<script async type="text/javascript" src="/app/login.min.js"></script>
+		        	<script async type="text/javascript" src="/app/login.min.js?v={{ assetics_version }}"></script>
 		        {% endif %}
 
 		        {% if mvc is defined and mvc %}
@@ -45,10 +47,10 @@
 		        		{% endif %}
 		        	</script>
 		        	<script defer type="text/javascript" src="//vk.com/js/api/openapi.js"></script>
-		        	<script defer type="text/javascript" src="/app/main.min.js"></script>
+		        	<script defer type="text/javascript" src="/app/main.min.js?v={{ assetics_version }}"></script>
 		        {% endif %}
 
-				<link rel="stylesheet" type="text/css" href="/style/style.min.css">
+				<link rel="stylesheet" type="text/css" href="/style/style.min.css?v={{ assetics_version }}">
 			{% endif %}
 		{% endblock %}
 

@@ -11,6 +11,7 @@
 
 @red: red;
 @orange: #f76e12;
+@yellow: #EFC26F;
 @green: #36BA81;
 
 @vkontakte: #577EA0;
@@ -82,6 +83,10 @@
 
 .invalid {
 	color: @red;
+}
+
+.line-through {
+	text-decoration: line-through;
 }
 
 [gt-profile-card] {
@@ -455,25 +460,26 @@ button[gt-invite-btn] {
 
 body.gt-login {
 
-	& > img {
-		.translate(-50%, -50%);
+	& > [gt-bg-img] {
 		position: fixed;
-		top: 50%;
-		left: 50%;
-		min-width: 100%;
-		min-height: 100%;
+		top: 0;
+		left: 0;
+		width: 100%;
+		height: 100%;
+		background: url(/img/Sky.jpg) no-repeat center center fixed; 
+		background-size: cover;
 	}
 
 	& > [gt-bg] {
 		opacity: 0.5;
-		background-color: @sub-main-background;
+		background-color: @main-background;
 	}
 
 	& > [gt-counter] {
 		.translate(-50%, -50%);
 		margin: 0;
 		position: fixed;
-		top: 45%;
+		top: 44%;
 		left: 50%;
 		color: white;
 		width: 500px;
@@ -507,7 +513,7 @@ body.gt-login {
 		}
 
 		a {
-			color: @main-aqua;
+			color: lighten(@main-aqua, 2%);
 		}
 	}
 }

@@ -23,7 +23,7 @@ var apiUrl = "/api",
 		MESSAGE: 2
 	},
 
-	VK_ID = 4541892; //4545689;
+	VK_ID = ENV == 'dev' ? 4545689 : 4541892;
 
 function AUTH(data) {
 	if (data.error && data.error == "access denied" && typeof DEBUG === "undefined")
@@ -220,7 +220,9 @@ ThankApp.controller("MainController", ["$scope", "$http", "$location", "$sce", f
     };
 
     $scope.inviteVkFriend = function(friendData) {
-    	VK.Api.call('wall.post', { owner_id: friendData.id, message: "Приглашаю тебя на сайт saythank.me"}, function(){});
+    	VK.Api.call('wall.post', { owner_id: friendData.id, message: "Приглашаю тебя на сайт saythank.me"}, function(r){
+    		if (r.response.post_id) $http.post(apiUrl, { action: "setInvited" });
+    	});
     };
 
     $scope.showSayThankModal = function(userData) {

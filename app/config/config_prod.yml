@@ -15,6 +15,10 @@ monolog:
         console:
             type:  console
 
+twig:
+    globals:
+        assetics_version: "%assetics_version%"
+
 hwi_oauth:
     firewall_name: secured_area
     resource_owners:

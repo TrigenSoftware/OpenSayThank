@@ -33,20 +33,21 @@
             <button gt-orange-btn ng-click="showSayThankModal(userData)">Сказать Спасибо</button>
 		</section>
 	</article>
-	<article gt-how-to-start>
+	<article gt-how-to-start ng-if="!currentUserData.invited || !currentUserData.saidThanks || !currentUserData.gotThanks">
 		<header>Как начать?</header>
 		<ul>
-			<li>
-				1. Скажи первое “Спасибо”.<br>Вспомни  момент, когда твой друг сделал приятное тебе, <b>пригласи его (её)</b>.
+			<li ng-class="{ 'line-through' : currentUserData.invited }">
+				1. Вспомни момент, когда твой друг сделал приятное тебе, <b>пригласи его (её)</b>.
 			</li>
-			<li>
-				2. Получи первое “Спасибо”.<br><b>Расскажи</b> о позитивной Белке в соц сетях и получи от нее спасибо.
+			<li ng-class="{ 'line-through' : currentUserData.saidThanks }">
+				2. и <b>скажи ему (ей) первое “Спасибо”</b>.
 			</li>
-			<li>
-				3. <b>Пригласи</b> больше друзей, возможно им есть за что сказать тебе “Спасибо”.
+			<li ng-class="{ 'line-through' : currentUserData.gotThanks }">
+				3. <b>Получи первое “Спасибо”</b> и не забывай дальше благодарить твоих друзей за приятные моменты :-)
 			</li>
 		</ul>
-	</article></section>
+	</article>
+</section>
 <section gt-posts>
 	<ul gt-nav>
 		<li ng-class="{ selected : currentView == 1 }" ng-click="setIndexView(1)">Лента</li><li ng-class="{ selected : currentView == 2 }" ng-click="setIndexView(2)">Сказал</li><li ng-class="{ selected : currentView == 3 }" ng-click="setIndexView(3)">Получил</li>

@@ -6,10 +6,12 @@ parameters:
     database_name: appliveorg_gthnk
     database_user: root
     database_password: "040404"
+
     mailer_transport: smtp
     mailer_host: 127.0.0.1
     mailer_user: null
     mailer_password: null
+
     locale: en
     secret: 584
     debug_toolbar: false

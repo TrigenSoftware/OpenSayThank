@@ -36,6 +36,13 @@ class Profile
     private $email;
 
     /**
+     * @var boolean
+     *
+     * @ORM\Column(name="invited", type="boolean")
+     */
+    private $invited = false;
+
+    /**
      * @var integer
      *
      * @ORM\Column(name="follows", type="integer", nullable=true)
@@ -195,6 +202,29 @@ class Profile
     public function getEmail()
     {
         return $this->email;
+    }
+
+    /**
+     * Set invited
+     *
+     * @param string $invited
+     * @return Profile
+     */
+    public function setInvited($invited)
+    {
+        $this->invited = $invited;
+
+        return $this;
+    }
+
+    /**
+     * Get invited
+     *
+     * @return string 
+     */
+    public function getInvited()
+    {
+        return (bool)$this->invited;
     }
 
     /**
