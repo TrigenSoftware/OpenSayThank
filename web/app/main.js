@@ -384,6 +384,7 @@ ThankApp.controller("IndexViewController", [ "$scope", "$http", "$routeParams", 
     $scope.currentView = null;
     $scope.thanks = [];
     $scope.fromOffset = null;
+    $scope.loaded = false;
 
     runObserver("currentUser", function(){
     	$http
@@ -407,6 +408,7 @@ ThankApp.controller("IndexViewController", [ "$scope", "$http", "$routeParams", 
     	$scope.thanks = [];
     	$scope.fromOffset = null;
     	$scope.currentView = index;
+    	$scope.loaded = false;
     	var action;
 
     	switch (index) {
@@ -431,6 +433,7 @@ ThankApp.controller("IndexViewController", [ "$scope", "$http", "$routeParams", 
 			    })
 			    .success(function(data) {
 			    	AUTH(data);
+			    	$scope.loaded = true;
 
 			    	if (data.error) return;
 			    	
@@ -475,6 +478,7 @@ ThankApp.controller("ProfileViewController", [ "$scope", "$http", "$location", "
     $scope.currentView = null;
     $scope.thanks = [];
     $scope.fromOffset = null;
+    $scope.loaded = false;
 
     $scope.setIndexView = function(index) {
     	if (index == $scope.currentView) return;
@@ -484,6 +488,7 @@ ThankApp.controller("ProfileViewController", [ "$scope", "$http", "$location", "
     	$scope.thanks = [];
     	$scope.fromOffset = null;
     	$scope.currentView = index;
+    	$scope.loaded = false;
     	var action;
 
     	switch (index) {
@@ -508,6 +513,7 @@ ThankApp.controller("ProfileViewController", [ "$scope", "$http", "$location", "
 			    })
 			    .success(function(data) {
 			    	AUTH(data);
+			    	$scope.loaded = true;
 
 			    	if (data.error) return;
 			    	

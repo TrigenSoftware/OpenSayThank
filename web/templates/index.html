@@ -26,7 +26,10 @@
 		</section>
 		<section gt-actions>
 			<button gt-green-btn ng-click="invite()">Пригласить друзей</button>
-			<button gt-orange-btn ng-click="logout()">Выход</button>
+			<button gt-orange-btn ng-click="showSayThankModal()">Сказать Спасибо</button>
+		</section>
+		<section gt-sub-action>
+			<a ng-click="logout()">Выход</a>
 		</section>
 	</article>
 	<article gt-how-to-start ng-if="!currentUserData.invited || !currentUserData.saidThanks || !currentUserData.gotThanks">
@@ -69,5 +72,8 @@
 				<a ng-if="thankData.fived" ng-click="removeFive(thankData)">Дал Пять &bull; {{ thankData.gotFives }}</a>
 			</li>
 		</ul>
+	</article>
+	<article ng-if="!thanks.length && loaded">
+		<dd>Пока ничего нет.</dd>
 	</article>
 </section>

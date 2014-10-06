@@ -204,6 +204,18 @@
 		}
 	}
 
+	[gt-sub-action] {
+		font-size: 13px;
+		height: 35px;
+		line-height: 35px;
+		text-align: center;
+		border-top: 1px solid @border-bottom;
+
+		a {
+			cursor: pointer;
+			text-decoration: underline;
+		}
+	}
 }
 
 [gt-bg] {
@@ -764,6 +776,14 @@ body > main {
 		border-bottom: 1px solid @border-bottom;
 		padding: 15px 20px 0 70px;
 		cursor: pointer;
+
+		dd {
+			.translate(-50%, -50%);
+			margin: 0;
+			position: absolute;
+			left: 50%;
+			top: 50%;
+		}
 
 		& > img {
 			height: 45px;
