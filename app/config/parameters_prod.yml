@@ -17,4 +17,4 @@ parameters:
     debug_toolbar: false
     debug_redirects: false
     use_assetic_controller: true
-    assetics_version: "1.1"
+    assetics_version: "1.2"
