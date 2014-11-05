@@ -3,18 +3,18 @@
 
 	This file is part of OpenSayThank.
 
-    OpenSayThank is free software: you can redistribute it and/or modify
-    it under the terms of the GNU General Public License as published by
-    the Free Software Foundation, either version 3 of the License, or
-    (at your option) any later version.
+	OpenSayThank is free software: you can redistribute it and/or modify
+	it under the terms of the GNU General Public License as published by
+	the Free Software Foundation, either version 3 of the License, or
+	(at your option) any later version.
 
-    OpenSayThank is distributed in the hope that it will be useful,
-    but WITHOUT ANY WARRANTY; without even the implied warranty of
-    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-    GNU General Public License for more details.
+	OpenSayThank is distributed in the hope that it will be useful,
+	but WITHOUT ANY WARRANTY; without even the implied warranty of
+	MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+	GNU General Public License for more details.
 
-    You should have received a copy of the GNU General Public License
-    along with OpenSayThank.  If not, see <http://www.gnu.org/licenses/>.
+	You should have received a copy of the GNU General Public License
+	along with OpenSayThank.  If not, see <http://www.gnu.org/licenses/>.
 */
 
 var ThankApp = angular.module("thankApp", ["ngRoute"]);
@@ -78,12 +78,12 @@ Number.prototype.toDualDigit = function() {
 
 
 VK.init({
-    apiId: VK_ID
+	apiId: VK_ID
 });
 
 ThankApp.config(function($routeProvider, $locationProvider) {
 	$locationProvider.html5Mode(true);
-    $routeProvider
+	$routeProvider
 	    .when("/", {
 	    	templateUrl : "/templates/index.html",
 	    	controller  : "IndexViewController"
@@ -127,45 +127,45 @@ ThankApp.config(function($routeProvider, $locationProvider) {
 
 
 ThankApp.directive("gtImageUpload", function() {
-    return {
-        restrict: "A",
-        scope: {
-            "image": "=gtImageUpload"
-        },
-        link: function ($scope, element, attributes) {
-            element.bind("change", function (changeEvent) {
-                var reader = new FileReader(),
-                	image  = changeEvent.target.files[0];
+	return {
+		    restrict: "A",
+	        scope: {
+	    	        "image": "=gtImageUpload"
+	            },
+	        link: function ($scope, element, attributes) {
+	    	        element.bind("change", function (changeEvent) {
+	        	            var reader = new FileReader(),
+	                        	image  = changeEvent.target.files[0];
 
-                reader.onload = function (loadEvent) {
-                    $scope.$apply(function () {
-                        $scope.image = loadEvent.target.result;
-                    });
-                };
+	        reader.onload = function (loadEvent) {
+	            	                $scope.$apply(function () {
+	                	                    $scope.image = loadEvent.target.result;
+	                                    });
+	                            };
 
-                if(image.type.indexOf("image") == 0) reader.readAsDataURL(image);
-            });
-        }
-    };
+	        if(image.type.indexOf("image") == 0) reader.readAsDataURL(image);
+	                    });
+	            }
+	        };
 });
 
 
 ThankApp.directive("gtLoadNext", function() {
-    return {
-        restrict: "A",
-        scope: {
-            "gtLoadNext": "&"
-        },
-        link: function ($scope, element, attributes) {
-        	var target = document.body;
-        	angular.element(window).scroll(function (e) {
-            	if ((target.scrollHeight - target.offsetHeight - target.scrollTop - window.innerHeight) < 100)
+	return {
+		    restrict: "A",
+	        scope: {
+	    	        "gtLoadNext": "&"
+	            },
+	        link: function ($scope, element, attributes) {
+	    	    	var target = document.body;
+	    	    	angular.element(window).scroll(function (e) {
+	    		        	if ((target.scrollHeight - target.offsetHeight - target.scrollTop - window.innerHeight) < 100)
 	                $scope.$apply(function() {
 	                    $scope.gtLoadNext();
 	                });
-            });
-        }
-    };
+	                        });
+	            }
+	        };
 });
 
 
@@ -179,142 +179,142 @@ ThankApp.controller("MainController", ["$scope", "$http", "$location", "$sce", f
 		attachment: ""
 	};
 
-    $scope.currentUserData = {};
-    $scope.searchQuery = '';
+$scope.currentUserData = {};
+$scope.searchQuery = '';
 
 
-    $scope.trustAsHtml = $sce.trustAsHtml;
+$scope.trustAsHtml = $sce.trustAsHtml;
 
-    $scope.humanTiming = function(time) {
-    	time = new Date(time);
-    	var diff = new Date() - time;
-    	
-    	if (diff < 60000) return "меньше минуты назад";
-    	if (diff < 3600000) {
-    		var min = Math.floor(diff / 60000), lst = min + "";
-    		lst = lst[lst.length - 1]*1;
+$scope.humanTiming = function(time) {
+			time = new Date(time);
+			var diff = new Date() - time;
 
-    		if ( min === 1 )
-    			return "минуту назад";
-    		else
-    		if ( lst == 1 && min > 20 )
-    			return min + " минуту назад";
-    		else
-    		if( (lst == 2 || lst == 3 || lst == 4) && (min > 20 || min < 10))
-    			return min + " минуты назад";
-    		else 
-    			return min + " минут назад";
-    	}
-    	if (diff < 86400000) {
-    		var hour = Math.floor(diff / 3600000), lst = hour + "";
-    		lst = lst[lst.length - 1]*1;
+			if (diff < 60000) return "меньше минуты назад";
+			if (diff < 3600000) {
+					var min = Math.floor(diff / 60000), lst = min + "";
+					lst = lst[lst.length - 1]*1;
 
-    		if ( hour === 1 )
-    			return "час назад";
-    		else
-    		if ( lst == 1 && hour > 20 )
-    			return hour + " час назад";
-    		else
-    		if( (lst == 2 || lst == 3 || lst == 4) && (hour > 20 || hour < 10))
-    			return hour + " часа назад";
-    		else 
-    			return hour + " часов назад";
-     	}
+		if ( min === 1 )
+						return "минуту назад";
+						else
+					if ( lst == 1 && min > 20 )
+						return min + " минуту назад";
+						else
+					if( (lst == 2 || lst == 3 || lst == 4) && (min > 20 || min < 10))
+						return min + " минуты назад";
+						else 
+						return min + " минут назад";
+					}
+			if (diff < 86400000) {
+					var hour = Math.floor(diff / 3600000), lst = hour + "";
+					lst = lst[lst.length - 1]*1;
 
-    	return time.toLocaleDateString("ru-RU", {
-    		year: "numeric", 
-    		month: "long", 
-    		day: "numeric"
-    	}) + " " + time.getHours().toDualDigit() + ":" + time.getMinutes().toDualDigit();
-    };
+		if ( hour === 1 )
+						return "час назад";
+						else
+					if ( lst == 1 && hour > 20 )
+						return hour + " час назад";
+						else
+					if( (lst == 2 || lst == 3 || lst == 4) && (hour > 20 || hour < 10))
+						return hour + " часа назад";
+						else 
+						return hour + " часов назад";
+				 	}
+
+	return time.toLocaleDateString("ru-RU", {
+					year: "numeric", 
+					month: "long", 
+					day: "numeric"
+				}) + " " + time.getHours().toDualDigit() + ":" + time.getMinutes().toDualDigit();
+};
 
 
 	$scope.search = function(){
-    	$location.path("/search/" + $scope.searchQuery);
-    };
+			$location.path("/search/" + $scope.searchQuery);
+		};
 
-    $scope.logout = function() {
-    	localStorage.clear();
-    	location.href = "/logout";
-    };
+$scope.logout = function() {
+			localStorage.clear();
+			location.href = "/logout";
+		};
 
-    $scope.invite = function() {
-    	$location.path("/invite");
-    };
+$scope.invite = function() {
+			$location.path("/invite");
+		};
 
-    $scope.inviteVkFriend = function(friendData) {
-    	VK.Api.call('wall.post', { owner_id: friendData.id, message: "Приглашаю тебя на сайт saythank.me"}, function(r){
-    		if (r.response.post_id) $http.post(apiUrl, { action: "setInvited" });
-    	});
-    };
+$scope.inviteVkFriend = function(friendData) {
+			VK.Api.call('wall.post', { owner_id: friendData.id, message: "Приглашаю тебя на сайт saythank.me"}, function(r){
+					if (r.response.post_id) $http.post(apiUrl, { action: "setInvited" });
+				});
+		};
 
-    $scope.showSayThankModal = function(userData) {
-    	$scope.modalState = MODAL_STATE.THANK;
-    	$scope.modal = {
+$scope.showSayThankModal = function(userData) {
+			$scope.modalState = MODAL_STATE.THANK;
+			$scope.modal = {
 			title: "Сказать Спасибо",
 			body: "Текст сообщения",
 			thankto: userData && userData.username || "",
 			userData: userData,
 			attachment: ""
 		};
-    };
+	};
 
-    $scope.hideModal = function() {
-    	$scope.modalState = MODAL_STATE.HIDDEN;
-    	$scope.modal = {
+$scope.hideModal = function() {
+			$scope.modalState = MODAL_STATE.HIDDEN;
+			$scope.modal = {
 			title: "",
 			body: "",
 			thankto: "",
 			attachment: ""
 		};
 		$scope.removeAttachment();
-    };
+	};
 
-    $scope.modalBodyLimit = function() {
-    	return 100 - document.sayThankForm.body.value.length;
-    };
+$scope.modalBodyLimit = function() {
+			return 100 - document.sayThankForm.body.value.length;
+		};
 
-    $scope.removeAttachment = function() {
-    	$scope.modal.attachment = "";
-    	angular.element("[gt-image-upload]").val("");
-    };
+$scope.removeAttachment = function() {
+			$scope.modal.attachment = "";
+			angular.element("[gt-image-upload]").val("");
+		};
 
-    $scope.sayThank = function() {
-    	if ($scope.modal.userData) $scope.modal.userData.gotThanks++;
+$scope.sayThank = function() {
+			if ($scope.modal.userData) $scope.modal.userData.gotThanks++;
 
-    	$http
-    		.post(apiUrl, { 
-    			action: "sayThank", 
-    			thankto: $scope.modal.thankto,
-    			body: $scope.modal.body,
-    			attachment: $scope.modal.attachment
-    		})
+	$http
+				.post(apiUrl, { 
+							action: "sayThank", 
+							thankto: $scope.modal.thankto,
+							body: $scope.modal.body,
+							attachment: $scope.modal.attachment
+						})
 	        .success(function(data) {
 	        	AUTH(data);
 	        	
 	        	if (data.error) return $scope.modal.userData.gotThanks--;
 	        	$scope.hideModal();
 	        });
-    };
+	    };
 
-    $scope.removeThank = function(thankData) {
-    	thankData.removed = true;
+$scope.removeThank = function(thankData) {
+			thankData.removed = true;
 
-    	$http
-    		.post(apiUrl, { 
-    			action: "removeThank", 
-    			id: thankData.id
-    		})
+	$http
+				.post(apiUrl, { 
+							action: "removeThank", 
+							id: thankData.id
+						})
 	        .success(function(data) {
 	        	AUTH(data);
 	        	
 	        	if (data.error) return thankData.removed = false;
 	        });
-    };
+	    };
 
 
-    $scope.giveFive = function(thankData) {
-    	thankData.fived = true;
+$scope.giveFive = function(thankData) {
+			thankData.fived = true;
 	    thankData.gotFives += 5;
 
 		$http
@@ -327,10 +327,10 @@ ThankApp.controller("MainController", ["$scope", "$http", "$location", "$sce", f
 	        	thankData.fived = false;
 	        	thankData.gotFives -= 5;
 	        });
-    };
+	    };
 
-    $scope.removeFive = function(thankData) {
-    	thankData.fived = false;
+$scope.removeFive = function(thankData) {
+			thankData.fived = false;
 	    thankData.gotFives -= 5;
 
 		$http
@@ -343,17 +343,17 @@ ThankApp.controller("MainController", ["$scope", "$http", "$location", "$sce", f
 	        	thankData.fived = true;
 	        	thankData.gotFives += 5;
 	        });
-    };
+	    };
 
 
-    $scope.follow = function(userData) {
-    	if (!userData || !userData.username) return;
+$scope.follow = function(userData) {
+			if (!userData || !userData.username) return;
 
 	    userData.follow = true;
-    	userData.followers++;
+	    	userData.followers++;
 
-    	$http
-    		.post(apiUrl, { action: "follow", username: userData.username })
+	$http
+				.post(apiUrl, { action: "follow", username: userData.username })
 	        .success(function(data) {
 	        	AUTH(data);
 
@@ -362,16 +362,16 @@ ThankApp.controller("MainController", ["$scope", "$http", "$location", "$sce", f
 	        	userData.follow = false;
 	        	userData.followers--;
 	        });
-    }
+	    }
 
-    $scope.unfollow = function(userData) {
-    	if (!userData || !userData.username) return;
+$scope.unfollow = function(userData) {
+			if (!userData || !userData.username) return;
 
 	    userData.follow = false;
-    	userData.followers--;
+	    	userData.followers--;
 
-    	$http
-    		.post(apiUrl, { action: "unfollow", username: userData.username })
+	$http
+				.post(apiUrl, { action: "unfollow", username: userData.username })
 	        .success(function(data) {
 	        	AUTH(data);
 
@@ -380,36 +380,36 @@ ThankApp.controller("MainController", ["$scope", "$http", "$location", "$sce", f
 	        	userData.follow = true;
 	        	userData.followers++;
 	        });
-    }
+	    }
 
-    $http
-        .post(apiUrl, { action: "currentUserData" })
-        .success(function(data) {
-        	AUTH(data);
+$http
+	    .post(apiUrl, { action: "currentUserData" })
+	        .success(function(data) {
+	    	    	AUTH(data);
 
-        	if (data.error) return;
+		if (data.error) return;
 
-        	$scope.currentUserData = data;
-        	if (data.username) localStorage.currentUsername = data.username;
-        	if (data.vkontakteId) localStorage.currentVkontakteId = data.vkontakteId;
-        });
+		$scope.currentUserData = data;
+	    	    	if (data.username) localStorage.currentUsername = data.username;
+	    	    	if (data.vkontakteId) localStorage.currentVkontakteId = data.vkontakteId;
+	    	    });
 
 }]);
 
 ThankApp.controller("IndexViewController", [ "$scope", "$http", "$routeParams", function($scope, $http, $params) {
 
 	killObservers();
-    
-    $scope.$parent.currentView = VIEWS.INDEX;
-    $scope.$parent.searchQuery = "";
 
-    $scope.currentView = null;
-    $scope.thanks = [];
-    $scope.fromOffset = null;
-    $scope.loaded = false;
+	$scope.$parent.currentView = VIEWS.INDEX;
+	$scope.$parent.searchQuery = "";
 
-    runObserver("currentUser", function(){
-    	$http
+$scope.currentView = null;
+$scope.thanks = [];
+	$scope.fromOffset = null;
+	$scope.loaded = false;
+
+runObserver("currentUser", function(){
+			$http
 	        .post(apiUrl, { action: "currentUserData" })
 	        .success(function(data) {
 	        	AUTH(data);
@@ -418,23 +418,23 @@ ThankApp.controller("IndexViewController", [ "$scope", "$http", "$routeParams", 
 
 	        	$scope.currentUserData = data;
 	        	if (data.username) localStorage.currentUsername = data.username;
-        		if (data.vkontakteId) localStorage.currentVkontakteId = data.vkontakteId;
+	        	    		if (data.vkontakteId) localStorage.currentVkontakteId = data.vkontakteId;
 	        });
 	});
 
-    $scope.setIndexView = function(index) {
-    	if (index == $scope.currentView) return;
+$scope.setIndexView = function(index) {
+			if (index == $scope.currentView) return;
 
-    	killObservers("thank");
+	killObservers("thank");
 
-    	$scope.thanks = [];
-    	$scope.fromOffset = null;
-    	$scope.currentView = index;
-    	$scope.loaded = false;
-    	var action;
+	$scope.thanks = [];
+			$scope.fromOffset = null;
+			$scope.currentView = index;
+			$scope.loaded = false;
+			var action;
 
-    	switch (index) {
-    		case INDEX_VIEWS.FEED:
+	switch (index) {
+					case INDEX_VIEWS.FEED:
 				action = "thanksWithData";
 				break;
 
@@ -443,9 +443,9 @@ ThankApp.controller("IndexViewController", [ "$scope", "$http", "$routeParams", 
 				break;
 
 			case INDEX_VIEWS.GOT:
-    			action = "gotThanksWithData";
-    	}
-    	
+						action = "gotThanksWithData";
+					}
+
 		runObserver("thank", function(){
 			$http
 			    .post(apiUrl, { 
@@ -481,40 +481,40 @@ ThankApp.controller("IndexViewController", [ "$scope", "$http", "$routeParams", 
 			    	$scope.thanks = $scope.thanks.concat(data);
 			    });
 		};
-    };
-    
-    $scope.setIndexView(INDEX_VIEWS.FEED);
+	};
+
+	$scope.setIndexView(INDEX_VIEWS.FEED);
 }]);
 
 ThankApp.controller("ProfileViewController", [ "$scope", "$http", "$location", "$routeParams", function($scope, $http, $location, $params) {
 
 	killObservers();
-    
-    if ($params.username == $scope.$parent.currentUserData.username) 
-    	return $location.path("/");
 
-    $scope.$parent.currentView = VIEWS.PROFILE;
-    $scope.$parent.searchQuery = "";
-    $scope.userData = {};
+	if ($params.username == $scope.$parent.currentUserData.username) 
+		return $location.path("/");
 
-    $scope.currentView = null;
-    $scope.thanks = [];
-    $scope.fromOffset = null;
-    $scope.loaded = false;
+$scope.$parent.currentView = VIEWS.PROFILE;
+$scope.$parent.searchQuery = "";
+	$scope.userData = {};
 
-    $scope.setIndexView = function(index) {
-    	if (index == $scope.currentView) return;
+$scope.currentView = null;
+$scope.thanks = [];
+	$scope.fromOffset = null;
+	$scope.loaded = false;
 
-    	killObservers("thank");
+$scope.setIndexView = function(index) {
+			if (index == $scope.currentView) return;
 
-    	$scope.thanks = [];
-    	$scope.fromOffset = null;
-    	$scope.currentView = index;
-    	$scope.loaded = false;
-    	var action;
+	killObservers("thank");
 
-    	switch (index) {
-    		case INDEX_VIEWS.FEED:
+	$scope.thanks = [];
+			$scope.fromOffset = null;
+			$scope.currentView = index;
+			$scope.loaded = false;
+			var action;
+
+	switch (index) {
+					case INDEX_VIEWS.FEED:
 				action = "thanksWithData";
 				break;
 
@@ -523,8 +523,8 @@ ThankApp.controller("ProfileViewController", [ "$scope", "$http", "$location", "
 				break;
 
 			case INDEX_VIEWS.GOT:
-    			action = "gotThanksWithData";
-    	}
+						action = "gotThanksWithData";
+					}
 
 		runObserver("thank", function(){
 			$http
@@ -561,10 +561,10 @@ ThankApp.controller("ProfileViewController", [ "$scope", "$http", "$location", "
 			    	$scope.thanks = $scope.thanks.concat(data);
 			    });
 		};
-    };
+	};
 
-    runObserver("user", function(){
-    	$http
+runObserver("user", function(){
+			$http
 	        .post(apiUrl, { action: "userData", username: $params.username })
 	        .success(function(data) {
 	        	AUTH(data);
@@ -581,22 +581,22 @@ ThankApp.controller("ProfileViewController", [ "$scope", "$http", "$location", "
 ThankApp.controller("FollowsViewController", [ "$scope", "$http", "$location", "$routeParams", function($scope, $http, $location, $params) {
 
 	killObservers();
-    
-    if ($params.username == $scope.$parent.currentUserData.username) 
-    	$location.path("/follows");
 
-    if (!$params.username) 
-    	$scope.$parent.currentView = VIEWS.FOLLOWS;
+	if ($params.username == $scope.$parent.currentUserData.username) 
+		$location.path("/follows");
 
-    $scope.$parent.searchQuery = "";
-    $scope.follows = [];
-    $scope.fromOffset = null;
+if (!$params.username) 
+		$scope.$parent.currentView = VIEWS.FOLLOWS;
 
-    runObserver("follows", function(){
+$scope.$parent.searchQuery = "";
+$scope.follows = [];
+	$scope.fromOffset = null;
+
+runObserver("follows", function(){
 		$http
 		    .post(apiUrl, { 
 		    	action: "follows", 
-        		username: $params.username || $scope.$parent.currentUserData.username || localStorage.currentUsername, 
+		    	    		username: $params.username || $scope.$parent.currentUserData.username || localStorage.currentUsername, 
 		    	from: !$scope.follows[0] ? $scope.fromOffset : $scope.follows[0].id 
 		    })
 		    .success(function(data) {
@@ -626,28 +626,28 @@ ThankApp.controller("FollowsViewController", [ "$scope", "$http", "$location", "
 		    	$scope.follows = $scope.follows.concat(data);
 		    });
 	};
-    
+
 }]);
 
 ThankApp.controller("FollowersViewController", [ "$scope", "$http", "$location", "$routeParams", function($scope, $http, $location, $params) {
 
 	killObservers();
-    
-    if ($params.username == $scope.$parent.currentUserData.username) 
-    	$location.path("/followers");
 
-    if (!$params.username) 
-    	$scope.$parent.currentView = VIEWS.FOLLOWERS;
+	if ($params.username == $scope.$parent.currentUserData.username) 
+		$location.path("/followers");
 
-    $scope.$parent.searchQuery = "";
-    $scope.followers = [];
-    $scope.fromOffset = null;
-    
-    runObserver("followers", function(){
+if (!$params.username) 
+		$scope.$parent.currentView = VIEWS.FOLLOWERS;
+
+$scope.$parent.searchQuery = "";
+$scope.followers = [];
+	$scope.fromOffset = null;
+
+	runObserver("followers", function(){
 		$http
 		    .post(apiUrl, { 
 		    	action: "followers", 
-        		username: $params.username || $scope.$parent.currentUserData.username || localStorage.currentUsername, 
+		    	    		username: $params.username || $scope.$parent.currentUserData.username || localStorage.currentUsername, 
 		    	from: !$scope.followers[0] ? $scope.fromOffset : $scope.followers[0].id 
 		    })
 		    .success(function(data) {
@@ -683,18 +683,18 @@ ThankApp.controller("FollowersViewController", [ "$scope", "$http", "$location",
 ThankApp.controller("SearchViewController", [ "$scope", "$http", "$routeParams", function($scope, $http, $params) {
 
 	killObservers();
-    
-    $scope.$parent.currentView = VIEWS.SEARCH;
-    $scope.searchResult = [];
-    $scope.fromOffset = null;
 
-    $scope.$parent.searchQuery = $params.query || "";
+	$scope.$parent.currentView = VIEWS.SEARCH;
+	$scope.searchResult = [];
+	$scope.fromOffset = null;
 
-    runObserver("search", function(){
+$scope.$parent.searchQuery = $params.query || "";
+
+runObserver("search", function(){
 		$http
 		    .post(apiUrl, { 
 		    	action: "searchUserWithData", 
-        		query: $scope.$parent.searchQuery,
+		    	    		query: $scope.$parent.searchQuery,
 		    	from: !$scope.searchResult[0] ? $scope.fromOffset : $scope.searchResult[0].id 
 		    })
 		    .success(function(data) {
@@ -729,12 +729,12 @@ ThankApp.controller("SearchViewController", [ "$scope", "$http", "$routeParams",
 ThankApp.controller("InviteViewController", [ "$scope", "$http", "$routeParams", function($scope, $http, $params) {
 
 	killObservers();
-    
-    $scope.$parent.currentView = VIEWS.INVITE;
-    $scope.friends = [];
-    $scope.fromOffset = 0;
-    
-    VK.Api.call('friends.get', {
+
+	$scope.$parent.currentView = VIEWS.INVITE;
+	$scope.friends = [];
+	$scope.fromOffset = 0;
+
+	VK.Api.call('friends.get', {
 		user_id: $scope.$parent.currentUserData.vkontakteId || localStorage.currentVkontakteId || "", 
 		order: "hints", 
 		count: 15, 
