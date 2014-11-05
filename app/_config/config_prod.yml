@@ -1,0 +1,40 @@
+imports:
+    - { resource: parameters_prod.yml }
+    - { resource: config.yml }
+
+monolog:
+    handlers:
+        main:
+            type:         fingers_crossed
+            action_level: error
+            handler:      nested
+        nested:
+            type:  stream
+            path:  "%kernel.logs_dir%/%kernel.environment%.log"
+            level: debug
+        console:
+            type:  console
+
+twig:
+    globals:
+        assetics_version: "%assetics_version%"
+
+hwi_oauth:
+    firewall_name: secured_area
+    resource_owners:
+        twitter:
+            type:                twitter
+            client_id:           ~
+            client_secret:       ~
+            paths:
+                profilepicture:  profile_image_url
+
+        vkontakte:
+            type:                vkontakte
+            client_id:           ~
+            client_secret:       ~
+
+        instagram:
+            type:                instagram
+            client_id:           ~
+            client_secret:       ~
