@@ -1,6 +1,15 @@
 {% extends 'TrigenThankBundle:Thank:layout.html.twig' %}
 
 {% block title %}Сказать Спасибо{% endblock %}
+{% block meta %}
+	<meta name="title" content="{{ username }} &rarr; {{ thankto }}" />
+	<meta name="description" content="{{ flatBody }}" />
+	{% if attachment is defined and attachment %}
+       <link rel="image_src" href="http://saythank.me/attachments/{{ attachment }}" />
+    {% else %}
+    	<link rel="image_src" href="http://saythank.me/logo.png" />
+    {% endif %}
+{% endblock %}
 
 {% block includes %}
 	{% if app.environment == 'dev' %}
@@ -10,16 +19,6 @@
 	{% else %}
 		<link rel="stylesheet" type="text/css" href="/style/style.min.css">
 	{% endif %}
-{% endblock %}
-
-{% block meta %}
-	<meta name="title" content="{{ username }} &rarr; {{ thankto }}" />
-	<meta name="description" content="{{ flatBody }}" />
-	{% if attachment is defined and attachment %}
-       <link rel="image_src" href="http://saythank.me/attachments/{{ attachment }}" />
-    {% else %}
-    	<link rel="image_src" href="http://saythank.me/logo.png" />
-    {% endif %}
 {% endblock %}
 
 {% block body %}

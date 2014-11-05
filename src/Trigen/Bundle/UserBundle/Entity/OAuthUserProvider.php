@@ -32,13 +32,15 @@ class OAuthUserProvider implements UserProviderInterface, OAuthAwareUserProvider
      */
     protected $currentUser;
 
-    public function __construct(ManagerRegistry $registry) {
+    public function __construct(ManagerRegistry $registry) 
+    {
         $this->em = $registry->getManager();
         $this->users = $this->em->getRepository("TrigenUserBundle:User"); 
         $this->profiles = $this->em->getRepository("TrigenUserBundle:Profile");  
     }
 
-    public function loadUserByOAuthUserResponse(UserResponseInterface $response) {
+    public function loadUserByOAuthUserResponse(UserResponseInterface $response) 
+    {
         $id       = $response->getUsername()."";
         $username = $response->getNickname();
         $realname = $response->getRealName();
@@ -93,7 +95,8 @@ class OAuthUserProvider implements UserProviderInterface, OAuthAwareUserProvider
         return $user;
     }
 
-    public function loadUserByUsername($username) {
+    public function loadUserByUsername($username) 
+    {
 
         $user = $this->users->findOneBy(array('username' => $username));
         if (!$user) {
@@ -103,7 +106,8 @@ class OAuthUserProvider implements UserProviderInterface, OAuthAwareUserProvider
         return $user;
     }
 
-    public function refreshUser(UserInterface $user) {
+    public function refreshUser(UserInterface $user) 
+    {
         $this->currentUser = $user;
         return $this->loadUserByUsername($user->getUsername());
     }
@@ -113,7 +117,8 @@ class OAuthUserProvider implements UserProviderInterface, OAuthAwareUserProvider
         return $class === $this->class || is_subclass_of($class, $this->class);
     }
 
-    public function realnameToUsername($realname) {
+    public function realnameToUsername($realname) 
+    {
         $tr = array(
             "А"=>"A","Б"=>"B","В"=>"V","Г"=>"G",
             "Д"=>"D","Е"=>"E","Ё"=>"Yo","Ж"=>"J","З"=>"Z","И"=>"I",

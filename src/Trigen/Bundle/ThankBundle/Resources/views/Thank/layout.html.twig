@@ -1,11 +1,32 @@
 <!DOCTYPE html>
 <html{% if mvc is defined and mvc %} ng-app="thankApp"{% endif %}>
 	<head>
-		<meta http-equiv="content-type" content="text/html; charset=utf-8" />
 		<title>{% block title %}{% endblock %}</title>
+		<meta name="viewport" content="width=device-width, initial-scale=0.8">
+        <meta http-equiv="content-type" content="text/html; charset=utf-8">
+        <meta http-equiv="content-language" content="ru-RU">
+        <meta name="robots" content="all">
+        <meta name="author" content="http://brainstorage.me/dangreen">
+
+		{% block meta %}
+			<meta property="og:title" content='You Will'>
+	        <meta property="og:site_name" content='You Will'>
+	        <meta property="og:type" content="website">
+	        <meta property="og:image" content="http://youwill.pro/img/logo.png">
+	        <meta property="og:description" content="You Will - сервис дистанционных тренирово.">
+	        <meta property="og:url" content="http://youwill.pro">
+		{% endblock %}
 
 		{% block includes %}
 			<script type="text/javascript">var ENV = "{{ app.environment }}";</script>
+        	<script type="text/javascript">
+        		{% if app.user and app.user.getUsername() %}
+        			localStorage.currentUsername = "{{ app.user.getUsername() }}"; 
+        		{% endif %}
+        		{% if app.user and app.user.getVkontakteId() %}
+        			localStorage.currentVkontakteId = "{{ app.user.getVkontakteId() }}";
+        		{% endif %}
+        	</script>
 
 			{% if app.environment == 'dev' %}
 		        <script defer type="text/javascript" src="/bower_components/jquery/dist/jquery.min.js"></script>
@@ -15,14 +36,6 @@
 		        {% endif %}
 
 		        {% if mvc is defined and mvc %}
-		        	<script type="text/javascript">
-		        		{% if app.user and app.user.getUsername() %}
-		        			localStorage.currentUsername = "{{ app.user.getUsername() }}"; 
-		        		{% endif %}
-		        		{% if app.user and app.user.getVkontakteId() %}
-		        			localStorage.currentVkontakteId = "{{ app.user.getVkontakteId() }}";
-		        		{% endif %}
-		        	</script>
 		        	<script defer type="text/javascript" src="//vk.com/js/api/openapi.js"></script>
 			        <script defer type="text/javascript" src="/bower_components/angular/angular.min.js"></script>
 			        <script defer type="text/javascript" src="/bower_components/angular-route/angular-route.min.js"></script>
@@ -38,14 +51,6 @@
 		        {% endif %}
 
 		        {% if mvc is defined and mvc %}
-		        	<script type="text/javascript">
-		        		{% if app.user and app.user.getUsername() %}
-		        			localStorage.currentUsername = "{{ app.user.getUsername() }}"; 
-		        		{% endif %}
-		        		{% if app.user and app.user.getVkontakteId() %}
-		        			localStorage.currentVkontakteId = "{{ app.user.getVkontakteId() }}";
-		        		{% endif %}
-		        	</script>
 		        	<script defer type="text/javascript" src="//vk.com/js/api/openapi.js"></script>
 		        	<script defer type="text/javascript" src="/app/main.min.js?v={{ assetics_version }}"></script>
 		        {% endif %}
@@ -53,8 +58,6 @@
 				<link rel="stylesheet" type="text/css" href="/style/style.min.css?v={{ assetics_version }}">
 			{% endif %}
 		{% endblock %}
-
-		{% block meta %}{% endblock %}
 	</head>
 	<body
 		{% if requireLogin is defined and requireLogin %} 

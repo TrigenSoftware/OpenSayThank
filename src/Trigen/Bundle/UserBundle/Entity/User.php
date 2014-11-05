@@ -14,7 +14,7 @@ use Symfony\Component\Security\Core\User\EquatableInterface;
  */
 class User implements UserInterface, EquatableInterface, \Serializable
 {
-    private $roles, $solt;
+    private $roles;
 
     /**
      * @var integer
